@@ -1,0 +1,12 @@
+[submodule "Sumbodules/Common_Plugins"]
+	path = Sumbodules/Common_Plugins
+	url = ../Common_Plugins.git
+[submodule "Common"]
+	path = Common
+	url = ../Common.git
+[submodule "Submodules/Common"]
+	path = Submodules/Common
+	url = ../Common.git
+[submodule "Submodules/Common_Plugins"]
+	path = Submodules/Common_Plugins
+	url = https://github.com/v-Demin/Common_Plugins
