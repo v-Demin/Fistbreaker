@@ -44,7 +44,7 @@ ExportedObj/
 *.VC.db
 
 #All hidden folders
-*./
+.*/
 ProjectSettings/
 UserSettings/
 
