@@ -1,20 +1,22 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
+using ModestTree;
 using UnityEngine;
+using Zenject;
 
 public class Character : MonoBehaviour
 {
-    [SerializeField] private BasePower _power;
+    [Inject] private readonly DiContainer _container;
 
     private CharacteristicContainer _characteristics;
     
-    private List<AbstractSkill> _skillSet;
+    private SkillContainer _skillContainer;
+    [SerializeField] private BaseSkill _skill;
 
     private void Start()
     {
+        _skillContainer = new SkillContainer(_container);
+        _skillContainer.AddSkill(_skill);
+        
         _characteristics = new CharacteristicContainer(new List<float>() {1, 2, 3, 4, 5, 6});
-        _characteristics.Log(Color.yellow);
     }
 }
