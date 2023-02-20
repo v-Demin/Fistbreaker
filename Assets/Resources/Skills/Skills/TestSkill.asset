@@ -12,6 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dc010a43dd08b94cbbdc307fd9efd72, type: 3}
   m_Name: TestSkill
   m_EditorClassIdentifier: 
-  _keys: 0000000001000000
   _skillActions:
   - {fileID: 11400000, guid: 54ce34feb8b9bea41b08fc8b75bfaebc, type: 2}

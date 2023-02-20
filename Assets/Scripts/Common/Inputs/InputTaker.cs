@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Zenject;
 
@@ -22,6 +23,7 @@ public class InputTaker : MonoBehaviour
     {
         if (UpdateKeys())
         {
+            _keys.Select(k => k.ToString()).Aggregate((cur, next) => cur + ", " + next).Log(Color.magenta);
             OnKeyUpdate?.Invoke(_keys);
         };
     }
@@ -32,7 +34,6 @@ public class InputTaker : MonoBehaviour
         {
             if (Input.GetKeyDown(keyValuePair.Key))
             {
-                $"Добавляем: {keyValuePair.Value}".Log(Color.cyan);
                 _keys.Add(keyValuePair.Value);
                 return true;
             }

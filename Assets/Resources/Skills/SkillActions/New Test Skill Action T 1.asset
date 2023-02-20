@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c8ba7ea11f59ef2488170831db725dca, type: 3}
-  m_Name: New Test Skill Action T
+  m_Name: New Test Skill Action T 1
   m_EditorClassIdentifier: 
-  _color: {r: 0.099044085, g: 0.53333336, b: 0.6039216, a: 1}
-  _testMessage: 1
+  _color: {r: 0, g: 1, b: 0.11812568, a: 1}
+  _testMessage: "\u041F\u0430\u0440\u0430\u043C\u043F\u0430\u043C\u043F\u0430\u043C"

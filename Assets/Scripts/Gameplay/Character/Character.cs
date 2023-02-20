@@ -8,15 +8,25 @@ public class Character : MonoBehaviour
     [Inject] private readonly DiContainer _container;
 
     private CharacteristicContainer _characteristics;
+    private SkillContainer _skills;
+    //private ExperiencesContainer _exp;
+    //private  _exp;
     
-    private SkillContainer _skillContainer;
     [SerializeField] private BaseSkill _skill;
+    [SerializeField] private BaseSkill _skill2;
 
     private void Start()
     {
-        _skillContainer = new SkillContainer(_container);
-        _skillContainer.AddSkill(_skill);
-        
+        Init();
+    }
+
+    private void Init()
+    {
+        _skills = new SkillContainer(_container);
+        _skills.AddSkill(new Combination(new List<InputKey>(){InputKey.Right, InputKey.Up}), _skill);
+        _skills.AddSkill(new Combination(new List<InputKey>(){InputKey.Right, InputKey.Right}), _skill);
+        _skills.AddSkill(new Combination(new List<InputKey>(){InputKey.Right, InputKey.Left}), _skill);
+        _skills.AddSkill(new Combination(new List<InputKey>(){InputKey.Up}), _skill2);
         _characteristics = new CharacteristicContainer(new List<float>() {1, 2, 3, 4, 5, 6});
     }
 }

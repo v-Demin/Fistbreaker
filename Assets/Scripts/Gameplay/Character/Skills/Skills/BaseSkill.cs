@@ -5,19 +5,9 @@ using UnityEngine;
 [CreateAssetMenu]
 public class BaseSkill : ScriptableObject
 {
-    [SerializeField] private List<InputKey> _keys;
     [SerializeField] private List<AbstractSkillAction> _skillActions;
 
-    public bool IsAccessable(List<InputKey> list) => list.SequenceEqual(_keys);
-    public bool IsKeysEquals(List<InputKey> list) => IsAccessable(list) && (list.Count == _keys.Count);
-
-    public bool TryToAction(List<InputKey> list)
-    {
-        if(IsKeysEquals(list)) Action();
-        return IsKeysEquals(list);
-    }
-
-    protected virtual void Action()
+    public virtual void Action()
     {
         $"Пытаемся дёрнуть {name}".Log(Color.green);
         _skillActions.ForEach(action => action.Action());

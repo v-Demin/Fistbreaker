@@ -5,8 +5,10 @@ using UnityEngine;
 [CreateAssetMenu]
 public class TestSkillActionT : AbstractSkillAction
 {
+    [SerializeField] private Color _color;
+    [SerializeField] private string _testMessage;
     public override void Action()
     {
-        $"Тестовое действие {GetType()} сработало".Log(Color.black);
+        $"{_testMessage}, тестовое действие {GetType()} сработало".Log(_color);
     }
 }
