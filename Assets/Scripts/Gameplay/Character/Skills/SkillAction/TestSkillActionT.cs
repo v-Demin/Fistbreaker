@@ -7,7 +7,7 @@ public class TestSkillActionT : AbstractSkillAction
 {
     [SerializeField] private Color _color;
     [SerializeField] private string _testMessage;
-    public override void Action()
+    public override void Action(Character owner, Character enemy)
     {
         $"{_testMessage}, тестовое действие {GetType()} сработало".Log(_color);
     }

@@ -22,7 +22,7 @@ public class Character : MonoBehaviour
 
     private void Init()
     {
-        _skills = new SkillContainer(_container);
+        _skills = new SkillContainer(_container, this);
         _skills.AddSkill(new Combination(new List<InputKey>(){InputKey.Right, InputKey.Up}), _skill);
         _skills.AddSkill(new Combination(new List<InputKey>(){InputKey.Right, InputKey.Right}), _skill);
         _skills.AddSkill(new Combination(new List<InputKey>(){InputKey.Right, InputKey.Left}), _skill);

@@ -1,21 +1,31 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using ModestTree;
-using Unity.VisualScripting;
 using UnityEngine;
 using Zenject;
 
-public class SkillContainer
+public class SkillContainer: IDisposable
 {
-   
     [Inject] private readonly InputTaker _inputTaker;
+    [Inject] private readonly GameCycleController _cycleController;
+
+    private Character _owner;
 
     private Dictionary<Combination, BaseSkill> _skills = new Dictionary<Combination, BaseSkill>();
 
-    public SkillContainer(DiContainer container)
+    public SkillContainer(DiContainer container, Character owner)
     {
         _inputTaker = container.Resolve<InputTaker>();
+        _cycleController = container.Resolve<GameCycleController>();
+        _owner = owner;
+        
         _inputTaker.OnKeyUpdate += OnKeyUpdated;
+    }
+    
+    public void Dispose()
+    {
+        _inputTaker.OnKeyUpdate -= OnKeyUpdated;
     }
     
     public void AddSkill(Combination combination, BaseSkill skill)
@@ -31,22 +41,25 @@ public class SkillContainer
 
         if (keyList.Contains(InputKey.Down) && keyList.Count >= 1)
         {
-            "Задавнили".Log(Color.red);
             _inputTaker.ResetKeys();
             return;
         }
 
         if (!IsAnySkillsAccessable(combinationToCheck))
         {
-            "Ни одного скилла недоступно".Log(Color.red);
             _inputTaker.ResetKeys();
             return;
         }
+
+        var skill = FindInvokableSkill(combinationToCheck);
         
-        if (FindInvokableSkill(combinationToCheck) != null)
+        if (skill != null)
         {
             "Успешный инвок".Log(Color.red);
-            FindInvokableSkill(combinationToCheck).Action();
+            $"owner: {_owner != null}".Log(Color.green);
+            $"_cycleController: {_cycleController != null}".Log(Color.green);
+            $"_cycleController.GetEnemyFor(_owner): {_cycleController.GetEnemyFor(_owner) != null}".Log(Color.green);
+            skill.Action(_owner, _cycleController.GetEnemyFor(_owner));
             _inputTaker.ResetKeys();
             return;
         }

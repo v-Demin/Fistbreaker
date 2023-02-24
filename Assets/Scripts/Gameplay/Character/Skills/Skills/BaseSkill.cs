@@ -7,10 +7,10 @@ public class BaseSkill : ScriptableObject
 {
     [SerializeField] private List<AbstractSkillAction> _skillActions;
 
-    public virtual void Action()
+    public virtual void Action(Character owner, Character enemy)
     {
         $"Пытаемся дёрнуть {name}".Log(Color.green);
-        _skillActions.ForEach(action => action.Action());
+        _skillActions.ForEach(action => action.Action(owner, enemy));
     }
 
     public override string ToString()

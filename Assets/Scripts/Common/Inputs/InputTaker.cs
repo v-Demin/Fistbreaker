@@ -1,13 +1,11 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using Zenject;
 
 public class InputTaker : MonoBehaviour
 {
     public Action<List<InputKey>> OnKeyUpdate;
+    public Action OnKeyReset;
     
     private List<InputKey> _keys = new List<InputKey>();
 
@@ -23,7 +21,6 @@ public class InputTaker : MonoBehaviour
     {
         if (UpdateKeys())
         {
-            _keys.Select(k => k.ToString()).Aggregate((cur, next) => cur + ", " + next).Log(Color.magenta);
             OnKeyUpdate?.Invoke(_keys);
         };
     }
@@ -46,5 +43,6 @@ public class InputTaker : MonoBehaviour
     {
         "Сбрасываем кнопки".Log(Color.black);
         _keys.Clear();
+        OnKeyReset?.Invoke();
     }
 }
