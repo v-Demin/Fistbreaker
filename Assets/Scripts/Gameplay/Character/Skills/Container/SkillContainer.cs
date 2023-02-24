@@ -56,9 +56,6 @@ public class SkillContainer: IDisposable
         if (skill != null)
         {
             "Успешный инвок".Log(Color.red);
-            $"owner: {_owner != null}".Log(Color.green);
-            $"_cycleController: {_cycleController != null}".Log(Color.green);
-            $"_cycleController.GetEnemyFor(_owner): {_cycleController.GetEnemyFor(_owner) != null}".Log(Color.green);
             skill.Action(_owner, _cycleController.GetEnemyFor(_owner));
             _inputTaker.ResetKeys();
             return;
