@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: TestSkill
   m_EditorClassIdentifier: 
   _skillActions:
-  - {fileID: 11400000, guid: 54ce34feb8b9bea41b08fc8b75bfaebc, type: 2}
+  - {fileID: 11400000, guid: 693b0190368b0984babf06c57dcbe803, type: 2}

@@ -1,13 +1,22 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using TMPro;
 using UnityEngine;
 
 public class CharacteristicContainer
 {
+   
     private List<BaseCharacteristic> _characteristics;
+
+    private Type GetType(CharacteristicType type) => CharacteristicHelp.FromEnum(type);
     
     public T GetCharacteristic<T>() where T : BaseCharacteristic =>
         _characteristics.FirstOrDefault(c => c is T) as T;
+    
+    public BaseCharacteristic GetCharacteristic(CharacteristicType type) =>
+        _characteristics.FirstOrDefault(c => c.GetType() == GetType(type));
 
     public void AddCharacteristic<T>(float addValue) where T : BaseCharacteristic
     {

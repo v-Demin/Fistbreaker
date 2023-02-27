@@ -5,13 +5,19 @@ using UnityEngine;
 
 public class GameCycleController : MonoBehaviour
 {
-    public Action<int> OnRoundUpdated;
-    private int _round;
+    public Action<int> OnRoundStarted;
+    public Action<int> OnRoundEnded;
+    private int _roundNumber;
 
     private void StartNextRound()
     {
-        _round++;
-        OnRoundUpdated?.Invoke(_round);
+        _roundNumber++;
+        OnRoundStarted?.Invoke(_roundNumber);
+    }
+    
+    private void EndRound()
+    {
+        OnRoundEnded?.Invoke(_roundNumber);
     }
 
     [SerializeField] private BattleSide _playerSide;

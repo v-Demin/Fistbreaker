@@ -8,6 +8,7 @@ public class BattleSide
 {
     [Inject] private readonly GameCycleController _cycleController;
     
+    //[Todo]: учёт побеждённых персонажей
     public Character CurrentBattleCharacter => _characters.FirstOrDefault();
     public bool Contains(Character character) => _characters.Contains(character);
     
@@ -17,7 +18,7 @@ public class BattleSide
     public BattleSide(List<Character> characters)
     {
         _characters = characters;
-        _cycleController.OnRoundUpdated += i => SetNextCharacterAsCurrent();
+        _cycleController.OnRoundEnded += i => SetNextCharacterAsCurrent();
     }
 
     private void SetNextCharacterAsCurrent()

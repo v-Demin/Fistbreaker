@@ -361,7 +361,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 38133856}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.9075823, y: 2.2413414, z: -6322.817}
+  m_LocalPosition: {x: 9.99, y: 4.7, z: -6322.817}
   m_LocalScale: {x: 2.8151, y: 5.4827, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -381,7 +381,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _skill: {fileID: 11400000, guid: a2676ed506cec0843b0544990cb923e0, type: 2}
-  _skill2: {fileID: 0}
 --- !u!212 &38133859
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -532,7 +531,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _skill: {fileID: 11400000, guid: a2676ed506cec0843b0544990cb923e0, type: 2}
-  _skill2: {fileID: 11400000, guid: 6e727ead2f65cfb408b90b997140ee32, type: 2}
 --- !u!1 &54917061
 GameObject:
   m_ObjectHideFlags: 0
@@ -4601,3 +4599,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _inputTaker: {fileID: 2000033072}
+  _cycleController: {fileID: 509060587}
