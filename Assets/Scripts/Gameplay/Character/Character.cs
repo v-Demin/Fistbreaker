@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using ModestTree;
 using UnityEngine;
 using Zenject;
 
@@ -14,7 +12,6 @@ public class Character : MonoBehaviour
     private SkillContainer _skills;
     private ExperienceContainer _exp;
     
-    [SerializeField] private BaseSkill _skill;
 
     private void Start()
     {
@@ -28,7 +25,13 @@ public class Character : MonoBehaviour
             new Attributes(1600, 60)));
         
         _skills = new SkillContainer(_container, this);
-        
-        _skills.AddSkill(new Combination(new List<InputKey>(){InputKey.Right}), _skill);
+
+        DebugTest();
+    }
+    
+    [SerializeField] private ActiveSkill _skill;
+    private void DebugTest()
+    {
+        _skills.AddSkill(new Combination(new List<InputKey>(){InputKey.Up}), _skill);
     }
 }

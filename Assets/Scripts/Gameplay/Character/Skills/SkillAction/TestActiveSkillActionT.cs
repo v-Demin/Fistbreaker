@@ -4,12 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu]
-public class TestSkillActionT : AbstractSkillAction
+public class TestActiveSkillActionT : AbstractActiveSkillAction
 {
     [SerializeField] private Color _color;
     [SerializeField] private string _testMessage;
 
-    public override void Action(Character owner, Character enemy)
+    public override void Execute(Character owner, Character enemy)
     {
         $"{_testMessage}, тестовое действие {GetType()} сработало".Log(_color);
     }

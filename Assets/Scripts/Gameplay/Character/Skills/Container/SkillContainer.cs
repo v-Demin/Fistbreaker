@@ -12,7 +12,7 @@ public class SkillContainer: IDisposable
 
     private Character _owner;
 
-    private Dictionary<Combination, BaseSkill> _skills = new Dictionary<Combination, BaseSkill>();
+    private Dictionary<Combination, ActiveSkill> _skills = new ();
 
     public SkillContainer(DiContainer container, Character owner)
     {
@@ -28,7 +28,7 @@ public class SkillContainer: IDisposable
         _inputTaker.OnKeyUpdate -= OnKeyUpdated;
     }
     
-    public void AddSkill(Combination combination, BaseSkill skill)
+    public void AddSkill(Combination combination, ActiveSkill skill)
     {
         _skills.Add(combination, skill);
     }
@@ -55,7 +55,6 @@ public class SkillContainer: IDisposable
         
         if (skill != null)
         {
-            "Успешный инвок".Log(Color.red);
             skill.Action(_owner, _cycleController.GetEnemyFor(_owner));
             _inputTaker.ResetKeys();
             return;
@@ -65,7 +64,7 @@ public class SkillContainer: IDisposable
     public bool IsAnySkillsAccessable(Combination combination) =>
         _skills.Any(pair => pair.Key.IsAccessable(combination));
 
-    public BaseSkill FindInvokableSkill(Combination combination) =>
+    public ActiveSkill FindInvokableSkill(Combination combination) =>
         _skills.FirstOrDefault(pair => pair.Key.IsKeysEquals(combination)).Value;
     
     public override string ToString()
