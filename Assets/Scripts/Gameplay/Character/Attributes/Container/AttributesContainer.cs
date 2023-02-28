@@ -15,8 +15,8 @@ public class AttributesContainer
     public float EffectModifyer(CharacteristicType type) => _characteristics.GetCharacteristic(type).Value;
     public float CritDamageModifyer(CharacteristicType type) => _characteristics.GetCharacteristic(type).Value;
     public float BaseCritChance(CharacteristicType type) => _characteristics.GetCharacteristic(type).Value;
-    public float DefendModifyer() => _characteristics.GetCharacteristic<Endurance>().Value;
-    public float PowerModifyer() => _characteristics.GetCharacteristic<Balance>().Value;
+    public float DefendModifyer() => _characteristics.GetCharacteristic(CharacteristicType.Balance).Value;
+    public float PowerModifyer() => _characteristics.GetCharacteristic(CharacteristicType.Endurance).Value;
     
     private Attributes _currentAttributes;
     private Attributes _maxAttributes;

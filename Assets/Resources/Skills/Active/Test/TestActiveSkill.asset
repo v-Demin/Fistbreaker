@@ -10,12 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 795b7606afc53454c801127790717ae3, type: 3}
-  m_Name: BasePunch
+  m_Name: TestActiveSkill
   m_EditorClassIdentifier: 
   _rounds:
   - _name: Round 1
     _actions:
-    - {fileID: 11400000, guid: 132491e9a65032445b2759c7b14bdbd3, type: 2}
-  - _name: Round 2
-    _actions:
-    - {fileID: 11400000, guid: f9f70579d3c51744d9a56ce55e156f2d, type: 2}
+    - {fileID: 11400000, guid: 5fdfa8ab879320e49b651da8066bc2a6, type: 2}

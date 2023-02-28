@@ -12,16 +12,11 @@ public class CharacteristicContainer
 
     private Type GetType(CharacteristicType type) => CharacteristicHelp.FromEnum(type);
     
-    public T GetCharacteristic<T>() where T : BaseCharacteristic =>
-        _characteristics.FirstOrDefault(c => c is T) as T;
-    
     public BaseCharacteristic GetCharacteristic(CharacteristicType type) =>
         _characteristics.FirstOrDefault(c => c.GetType() == GetType(type));
 
-    public void AddCharacteristic<T>(float addValue) where T : BaseCharacteristic
-    {
-        GetCharacteristic<T>().AddValue(addValue);
-    }
+    public void AddCharacteristic(CharacteristicType type, float addValue) =>
+        GetCharacteristic(type).AddValue(addValue);
 
     #region Technical
 
@@ -51,8 +46,6 @@ public class CharacteristicContainer
 
     public override string ToString()
     {
-        GetCharacteristic<Balance>().Log(Color.cyan);
-
         return _characteristics
             .Select(c => c.ToString())
             .Aggregate((current, next) => current + '\n' + next);

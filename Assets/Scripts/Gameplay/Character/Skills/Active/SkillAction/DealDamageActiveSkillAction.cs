@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu]
+[CreateAssetMenu(menuName = "Skill/Active/Actions/DealDamage")]
 public class DealDamageActiveSkillAction : AbstractActiveSkillAction
 {
     [SerializeField] private CharacteristicType _damageCharacteric;

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Skill/ActiveSkill")]
+[CreateAssetMenu(menuName = "Skill/Active/ActiveSkill")]
 public class ActiveSkill : AbstractSkill
 {
     [SerializeField] private List<RoundInfo> _rounds;

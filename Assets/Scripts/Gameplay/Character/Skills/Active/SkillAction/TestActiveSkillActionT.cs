@@ -1,9 +1,6 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu]
+[CreateAssetMenu(menuName = "Skill/Active/Actions/_test")]
 public class TestActiveSkillActionT : AbstractActiveSkillAction
 {
     [SerializeField] private Color _color;
@@ -11,6 +8,6 @@ public class TestActiveSkillActionT : AbstractActiveSkillAction
 
     public override void Execute(Character owner, Character enemy)
     {
-        $"{_testMessage}, тестовое действие {GetType()} сработало".Log(_color);
+        $"{_testMessage}".Log(_color);
     }
 }
