@@ -13,6 +13,7 @@ public class Character : MonoBehaviour
     private PassiveSkillContainer _passiveSkills;
     private ExperienceContainer _exp;
     private ComboContainer _combo;
+    private PowerContainer _power;
 
     [SerializeField] private bool ISTAKINGINPUT_TODELETE;
     
@@ -32,6 +33,7 @@ public class Character : MonoBehaviour
         
         _activeSkills = _container.Instantiate<ActiveSkillsContainer>(new List<object> {this, _combo});
         _passiveSkills = new PassiveSkillContainer(this);
+        _power = new PowerContainer(Attributes);
 
         DebugTest();
     }
