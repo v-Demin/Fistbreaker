@@ -30,17 +30,9 @@ public class CharacteristicContainer
         _characteristics.Add(new Balance(ref _characteristics));
     }
     
-    public CharacteristicContainer(List<float> values)
+    public CharacteristicContainer(List<BaseCharacteristic> values)
     {
-        _characteristics = new List<BaseCharacteristic>()
-        {
-            new Strength(values[0]),
-            new Agility(values[1]),
-            new Endurance(values[2]),
-            new Intelligence(values[3]),
-            new Perception(values[4]),
-            new Willpower(values[5])
-        };
+        _characteristics = new List<BaseCharacteristic>(values);
         _characteristics.Add(new Balance(ref _characteristics));
     }
 

@@ -27,9 +27,21 @@ public class Character : MonoBehaviour
     {
         _combo = _container.Instantiate<ComboContainer>().Init(ISTAKINGINPUT_TODELETE);
         
-        Characteristics = new CharacteristicContainer(new List<float>() {1, 2, 3, 4, 5, 6});
-        Attributes = new AttributesContainer(new AttributesDataTransfer(Characteristics, _exp, new Attributes(200, 20),
-            new Attributes(1600, 60)));
+        Characteristics = new CharacteristicContainer(new List<BaseCharacteristic>()
+        {
+            new Strength(1),
+            new Agility(2),
+            new Endurance(3),
+            new Intelligence(4),
+            new Willpower(5),
+            new Perception(6)
+        });
+        
+        Attributes = new AttributesContainer(
+            new AttributesDataTransfer(
+                Characteristics, 
+                new Attributes(200, 20, 100),
+                new MaxAttributes(Characteristics, 1000, 500, 200)));
         
         _activeSkills = _container.Instantiate<ActiveSkillsContainer>(new List<object> {this, _combo});
         _passiveSkills = new PassiveSkillContainer(this);

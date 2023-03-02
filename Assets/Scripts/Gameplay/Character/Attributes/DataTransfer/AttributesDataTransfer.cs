@@ -1,14 +1,12 @@
 public class AttributesDataTransfer
 {
     public CharacteristicContainer Characteristics;
-    public ExperienceContainer Experiences; 
     public Attributes StartAttributes; 
-    public Attributes MaxAttributes; 
+    public MaxAttributes MaxAttributes; 
         
-    public AttributesDataTransfer(CharacteristicContainer characteristic, ExperienceContainer experiences, Attributes startAttributes, Attributes maxAttributes)
+    public AttributesDataTransfer(CharacteristicContainer characteristic, Attributes startAttributes, MaxAttributes maxAttributes)
     {
         Characteristics = characteristic;
-        Experiences = experiences;
         StartAttributes = startAttributes;
         MaxAttributes = maxAttributes;
     }

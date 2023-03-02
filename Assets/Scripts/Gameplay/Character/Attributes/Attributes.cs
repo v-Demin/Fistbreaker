@@ -1,27 +1,48 @@
+using System;
 using System.Linq;
 using System.Reflection;
 using UnityEngine;
 
 public class Attributes
 {
-    public float Health { get; private set; }
-    public float Sp { get; private set; }
+    protected float _baseHealth;
+    protected float _baseStamina;
+    protected float _baseMana;
+    public virtual float Health => _baseHealth;
+    public virtual float Stamina => _baseStamina;
+    public virtual float Mana => _baseMana;
 
-    public Attributes(float health, float sp)
+    public Attributes(float baseHealth, float baseStamina, float baseMana)
     {
-        Health = health;
-        Sp = sp;
+        _baseHealth = baseHealth;
+        _baseStamina = baseStamina;
+        _baseMana = baseMana;
     }
 
     public static Attributes Clamp(Attributes attributes, Attributes maxValues)
     {
         return new Attributes(
             Mathf.Clamp(attributes.Health, 0, maxValues.Health),
-            Mathf.Clamp(attributes.Sp, 0, maxValues.Sp));
+            Mathf.Clamp(attributes.Stamina, 0, maxValues.Stamina),
+            Math.Clamp(attributes.Mana, 0, maxValues.Mana));
+    }
+
+    public void Refresh(MaxAttributes maxAttributes)
+    {
+        
+    }
+
+    public void Add(Attributes attributes)
+    {
+        _baseHealth += attributes._baseHealth;
+        _baseStamina += attributes._baseStamina;
+        _baseMana += attributes._baseMana;
     }
     
-    public static Attributes operator +(Attributes a, Attributes b)
+    public void SetFrom(Attributes attributes)
     {
-        return new Attributes(a.Health + b.Health, a.Sp + b.Sp);
+        _baseHealth = attributes._baseHealth;
+        _baseStamina = attributes._baseStamina;
+        _baseMana = attributes._baseMana;
     }
 }
