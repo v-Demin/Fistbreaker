@@ -41,7 +41,6 @@ public class InputTaker : MonoBehaviour
 
     public void ResetKeys()
     {
-        "Сбрасываем кнопки".Log(Color.black);
         _keys.Clear();
         OnKeyReset?.Invoke();
     }
