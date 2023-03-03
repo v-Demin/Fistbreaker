@@ -37,11 +37,7 @@ public class Character : MonoBehaviour
             new Perception(6)
         });
         
-        Attributes = new AttributesContainer(
-            new AttributesDataTransfer(
-                Characteristics, 
-                new Attributes(200, 20, 100),
-                new MaxAttributes(Characteristics, 1000, 500, 200)));
+        Attributes = new AttributesContainer(new AttributesDataTransfer(Characteristics, new MaxAttributes(Characteristics)));
         
         _activeSkills = _container.Instantiate<ActiveSkillsContainer>(new List<object> {this, _combo});
         _passiveSkills = new PassiveSkillContainer(this);

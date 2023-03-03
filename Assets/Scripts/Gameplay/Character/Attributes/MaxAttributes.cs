@@ -16,6 +16,11 @@ public class MaxAttributes : Attributes
 
     private CharacteristicContainer _characteristics;
 
+    public MaxAttributes(CharacteristicContainer characteristics) :
+        this(characteristics, GameConstants.BASE_HEALTH, GameConstants.BASE_STAMINA, GameConstants.BASE_MANA)
+    {
+    }
+    
     public MaxAttributes(CharacteristicContainer characteristics, float baseHealth, float baseStamina, float baseMana) : base(baseHealth, baseStamina, baseMana)
     {
         _characteristics = characteristics;

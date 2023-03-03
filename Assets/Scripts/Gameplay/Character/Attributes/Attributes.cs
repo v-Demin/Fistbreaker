@@ -11,12 +11,17 @@ public class Attributes
     public virtual float Health => _baseHealth;
     public virtual float Stamina => _baseStamina;
     public virtual float Mana => _baseMana;
-
+    
     public Attributes(float baseHealth, float baseStamina, float baseMana)
     {
         _baseHealth = baseHealth;
         _baseStamina = baseStamina;
         _baseMana = baseMana;
+    }
+    
+    public Attributes(Attributes attributes) :
+        this(attributes._baseHealth, attributes._baseStamina, attributes._baseMana)
+    {
     }
 
     public static Attributes Clamp(Attributes attributes, Attributes maxValues)
