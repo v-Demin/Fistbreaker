@@ -40,15 +40,15 @@ public class AttributesContainer
     
     private void OnRoundUpdated()
     {
-        ChangeHealth(_maxAttributes.Health * (GameConstants.BASE_HEALTH_RESTORE_PROCENTAGE_ON_NEXT_ROUND_STARTED +
-                     _characteristics.GetCharacteristic(CharacteristicType.Endurance).Value * GameConstants.ADDITONAL_HEALTH_RESTORE_PRECENTAGE_ON_NEXT_ROUND_FROM_ENDURANCE +
-                     _characteristics.GetCharacteristic(CharacteristicType.Willpower).Value * GameConstants.ADDITONAL_HEALTH_RESTORE_PRECENTAGE_ON_NEXT_ROUND_FROM_WILLPOWER));
+        ChangeHealth(_maxAttributes.Health * (GameConstants.BASE_HEALTH_RESTORE_PERCENTAGE_ON_NEXT_ROUND_STARTED +
+                     _characteristics.GetCharacteristic(CharacteristicType.Endurance).Value * GameConstants.ADDITONAL_HEALTH_RESTORE_PERCENTAGE_ON_NEXT_ROUND_FROM_ENDURANCE +
+                     _characteristics.GetCharacteristic(CharacteristicType.Willpower).Value * GameConstants.ADDITONAL_HEALTH_RESTORE_PERCENTAGE_ON_NEXT_ROUND_FROM_WILLPOWER));
         
         ChangeSp(_maxAttributes.Stamina);
         
-        ChangeMana(_maxAttributes.Mana * (GameConstants.BASE_MANA_RESTORE_PROCENTAGE_ON_NEXT_ROUND_STARTED +
-                   _characteristics.GetCharacteristic(CharacteristicType.Endurance).Value * GameConstants.ADDITONAL_MANA_RESTORE_PRECENTAGE_ON_NEXT_ROUND_FROM_INTELLEGENCE +
-                   _characteristics.GetCharacteristic(CharacteristicType.Willpower).Value * GameConstants.ADDITONAL_MANA_RESTORE_PRECENTAGE_ON_NEXT_ROUND_FROM_WILLPOWER));
+        ChangeMana(_maxAttributes.Mana * (GameConstants.BASE_MANA_RESTORE_PERCENTAGE_ON_NEXT_ROUND_STARTED +
+                   _characteristics.GetCharacteristic(CharacteristicType.Endurance).Value * GameConstants.ADDITONAL_MANA_RESTORE_PERCENTAGE_ON_NEXT_ROUND_FROM_INTELLEGENCE +
+                   _characteristics.GetCharacteristic(CharacteristicType.Willpower).Value * GameConstants.ADDITONAL_MANA_RESTORE_PERCENTAGE_ON_NEXT_ROUND_FROM_WILLPOWER));
     }
 
     private void UpdateCurrentAttributes(Attributes changeValue)
