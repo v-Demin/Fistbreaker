@@ -5,6 +5,8 @@ public class FightSceneInstaller : MonoInstaller
 {
     [SerializeField] private InputTaker _inputTaker;
     [SerializeField] private GameCycleController _cycleController;
+    [SerializeField] private BattleController _battleController;
+    [SerializeField] private SPTimer _timer;
     
     public override void InstallBindings()
     {
@@ -13,5 +15,11 @@ public class FightSceneInstaller : MonoInstaller
         
         Container.Bind<GameCycleController>()
             .FromInstance(_cycleController);
+        
+        Container.Bind<BattleController>()
+            .FromInstance(_battleController);
+        
+        Container.Bind<SPTimer>()
+            .FromInstance(_timer);
     }
 }

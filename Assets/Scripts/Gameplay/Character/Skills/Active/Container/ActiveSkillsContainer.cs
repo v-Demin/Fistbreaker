@@ -1,20 +1,19 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using ModestTree;
-using UnityEngine;
 using Zenject;
 
 public class ActiveSkillsContainer
 {
-    [Inject] private readonly GameCycleController _cycleController;
+    [Inject] private readonly BattleController _battleController;
 
     private Character _owner;
     private ComboContainer _combo;
 
     private Dictionary<ActiveSkill, Combination> _skills = new ();
 
-    [Inject]
     public ActiveSkillsContainer(Character owner, ComboContainer combo)
     {
         _owner = owner;
@@ -26,7 +25,7 @@ public class ActiveSkillsContainer
         _combo.Register(combination);
         _skills.Add(skill, combination);
 
-        combination.OnCombinationExecuted += () => skill.Action(_owner, _cycleController.GetEnemyFor(_owner));
+        combination.OnCombinationExecuted += () => skill.Action(_owner, _battleController.GetEnemyFor(_owner));
     }
 
     public void RemoveSkill(ActiveSkill skill)
@@ -34,7 +33,7 @@ public class ActiveSkillsContainer
         _combo.Unregister(_skills[skill]);
         _skills.Remove(skill);
 
-        _skills[skill].OnCombinationExecuted -= () => skill.Action(_owner, _cycleController.GetEnemyFor(_owner));
+        _skills[skill].OnCombinationExecuted -= () => skill.Action(_owner, _battleController.GetEnemyFor(_owner));
     }
     
     public override string ToString()

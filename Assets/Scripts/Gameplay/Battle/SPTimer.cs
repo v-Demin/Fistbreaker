@@ -8,9 +8,11 @@ public class SPTimer : MonoBehaviour
     public Action OnTimerStarted;
     public Action OnTimerEnded;
 
+    private Tween _timerTween;
+    
     public void StartTimer(float time, Action timerStartedAction = null, Action timerEndedAction = null)
     {
-        DOVirtual.Float(0, time, time, value => OnTimeUpdated?.Invoke(time - value, value / time))
+        _timerTween = DOVirtual.Float(0, time, time, value => OnTimeUpdated?.Invoke(time - value, value / time))
             .SetEase(Ease.Linear)
             .OnStart(() =>
             {
@@ -22,5 +24,20 @@ public class SPTimer : MonoBehaviour
                 OnTimerEnded?.Invoke();
                 timerEndedAction?.Invoke();
             });
+    }
+
+    public void Play()
+    {
+        _timerTween?.Play();
+    }
+
+    public void Pause()
+    {
+        _timerTween?.Pause();
+    }
+
+    public void Stop()
+    {
+        _timerTween?.Kill();
     }
 }

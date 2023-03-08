@@ -5,6 +5,7 @@ using Zenject;
 public class Character : MonoBehaviour
 {
     [Inject] private readonly DiContainer _container;
+    
 
     public AttributesContainer Attributes;
     public CharacteristicContainer Characteristics;

@@ -8,8 +8,7 @@ public class PassiveSkillContainer
     private Character _owner;
 
     private List<PassiveSkill> _skills = new ();
-
-    [Inject]
+    
     public PassiveSkillContainer(Character owner)
     {
         _owner = owner;

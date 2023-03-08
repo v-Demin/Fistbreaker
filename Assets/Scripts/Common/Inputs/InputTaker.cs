@@ -1,29 +1,34 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class InputTaker : MonoBehaviour
 {
     public Action<List<InputKey>> OnKeyUpdate;
     public Action OnKeyReset;
-    
-    private List<InputKey> _keys = new List<InputKey>();
 
-    private Dictionary<KeyCode, InputKey> _keysCodes = new Dictionary<KeyCode, InputKey>()
+    private bool _isInputAvailable = true;
+    private List<InputKey> _keys = new ();
+
+    private Dictionary<KeyCode, InputKey> _keysCodes = new ()
     {
         {KeyCode.UpArrow, InputKey.Up},
         {KeyCode.LeftArrow, InputKey.Left},
         {KeyCode.RightArrow, InputKey.Right},
         {KeyCode.DownArrow, InputKey.Down}
     };
+    
 
     private void Update()
     {
-        if (UpdateKeys())
+        if (_isInputAvailable && UpdateKeys())
         {
             OnKeyUpdate?.Invoke(_keys);
         };
     }
+
+    public void ChangeInputAvailability(bool value) => _isInputAvailable = value;
 
     private bool UpdateKeys()
     {
