@@ -53,5 +53,6 @@ public class Character : MonoBehaviour
     {
         _activeSkills.AddSkill(new Combination(new List<InputKey>(){InputKey.Up}), _skill);
         _passiveSkills.AddSkill(_passiveSkill);
+        $"{name}: {Attributes.CurrentAttributes.Stamina}, {Attributes.MaxAttributes.Stamina}".Log(Color.green);
     }
 }

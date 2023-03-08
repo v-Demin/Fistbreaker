@@ -14,13 +14,8 @@ public class PreparationPhase : AbstractRoundPhase
     public override void StartPhase()
     {
         $"Фаза {GetType()} стартанула".Log(Color.cyan);
-        _timer.StartTimer(PlayerSide.CurrentBattleCharacter.Attributes.Stamina);
+        _timer.StartTimer(PlayerSide.CurrentBattleCharacter.Attributes.CurrentAttributes.Stamina);
         _inputTaker.ChangeInputAvailability(true);
-        
-        var speedModifier = PlayerSide.CurrentBattleCharacter.Attributes.Stamina /
-                            EnemySide.CurrentBattleCharacter.Attributes.Stamina;
-        
-        speedModifier.Log(Color.black);
 
         _timer.OnTimerEnded += EndPhase;
         PlayerSide.OnAllCharactersDefeated += EndPhase;

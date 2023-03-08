@@ -16,8 +16,8 @@ MonoBehaviour:
   _baseDamage: 5
   _damageMuliplier: 0.4
   _critChanceCharacteristic: 2
-  _baseCritChance: 0.1
-  _critChanceMuliplier: 0.4
+  _baseCritChance: -1
+  _critChanceMuliplier: 0
   _critDamageCharacteristic: 0
   _baseCritDamage: 1.4
   _critDamageMuliplier: 1

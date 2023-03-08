@@ -5,9 +5,7 @@ public class AttributesContainer
 {
     private readonly CharacteristicContainer _characteristics;
 
-    public Action<Attributes> OnCurrentAttributesChanged;
-    public Action<Attributes> OnMaxAttributesChanged;
-    public Action OnHealthOver;
+
 
 
     //[Todo:] формулы
@@ -18,50 +16,17 @@ public class AttributesContainer
     public float DefendModifyer => _characteristics.GetCharacteristic(CharacteristicType.Balance).Value;
     public float PowerModifyer => _characteristics.GetCharacteristic(CharacteristicType.Endurance).Value;
 
-    public float Health => _currentAttributes.Health;
-    public float Stamina => _currentAttributes.Stamina;
-    public float Mana => _currentAttributes.Mana;
-
-    private Attributes _currentAttributes;
-    private MaxAttributes _maxAttributes;
+    public Attributes CurrentAttributes { get; private set; }
+    public MaxAttributes MaxAttributes { get; private set; }
 
     public AttributesContainer(AttributesDataTransfer data)
     {
         _characteristics = data.Characteristics;
-        _currentAttributes = data.StartAttributes;
-        _maxAttributes = data.MaxAttributes;
+        CurrentAttributes = data.StartAttributes;
+        MaxAttributes = data.MaxAttributes;
     }
 
-    public void ChangeHealth(float value) => UpdateCurrentAttributes(new Attributes(value, 0, 0));
-    public void ChangeStamina(float value) => UpdateCurrentAttributes(new Attributes(0, value, 0));
-    public void ChangeMana(float value) => UpdateCurrentAttributes(new Attributes(0, 0, value));
 
-    private void OnRoundStarted()
-    {
-        _currentAttributes.SetFrom(_maxAttributes);
-    }
-    
-    private void OnRoundUpdated()
-    {
-        ChangeHealth(_maxAttributes.Health * (GameConstants.BASE_HEALTH_RESTORE_PERCENTAGE_ON_NEXT_ROUND_STARTED +
-                     _characteristics.GetCharacteristic(CharacteristicType.Endurance).Value * GameConstants.ADDITONAL_HEALTH_RESTORE_PERCENTAGE_ON_NEXT_ROUND_FROM_ENDURANCE +
-                     _characteristics.GetCharacteristic(CharacteristicType.Willpower).Value * GameConstants.ADDITONAL_HEALTH_RESTORE_PERCENTAGE_ON_NEXT_ROUND_FROM_WILLPOWER));
-        
-        ChangeStamina(_maxAttributes.Stamina);
-        
-        ChangeMana(_maxAttributes.Mana * (GameConstants.BASE_MANA_RESTORE_PERCENTAGE_ON_NEXT_ROUND_STARTED +
-                   _characteristics.GetCharacteristic(CharacteristicType.Endurance).Value * GameConstants.ADDITONAL_MANA_RESTORE_PERCENTAGE_ON_NEXT_ROUND_FROM_INTELLEGENCE +
-                   _characteristics.GetCharacteristic(CharacteristicType.Willpower).Value * GameConstants.ADDITONAL_MANA_RESTORE_PERCENTAGE_ON_NEXT_ROUND_FROM_WILLPOWER));
-    }
 
-    private void UpdateCurrentAttributes(Attributes changeValue)
-    {
-        _currentAttributes.Add(changeValue);
-        _currentAttributes = Attributes.Clamp(_currentAttributes, _maxAttributes);
-        OnCurrentAttributesChanged?.Invoke(_currentAttributes);
-        if (_currentAttributes.Health <= 0)
-        {
-            OnHealthOver?.Invoke();
-        }
-    }
+
 }

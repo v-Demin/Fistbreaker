@@ -8,7 +8,12 @@ public class BaseViewBar : MonoBehaviour
     
     public void UpdateText(float time)
     {
-        _textMesh.text = time.ToString("0.00");
+        UpdateText(time.ToString("0.00"));
+    }
+    
+    public void UpdateText(string text)
+    {
+        _textMesh.text = text;
     }
 
     public void UpdateBar(float lerp)

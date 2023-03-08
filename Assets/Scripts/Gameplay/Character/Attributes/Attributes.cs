@@ -1,53 +1,65 @@
 using System;
-using System.Linq;
-using System.Reflection;
 using UnityEngine;
 
 public class Attributes
 {
-    protected float _baseHealth;
-    protected float _baseStamina;
-    protected float _baseMana;
-    public virtual float Health => _baseHealth;
-    public virtual float Stamina => _baseStamina;
-    public virtual float Mana => _baseMana;
+    public Action<Attributes> OnCurrentAttributesChanged;
+    public Action OnHealthOver;
+
+    private float _health;
+    private float _stamina;
+    private float _mana;
+
+    public float Health => _health;
+    public float Stamina => _stamina;
+    public float Mana => _mana;
     
-    public Attributes(float baseHealth, float baseStamina, float baseMana)
+    private MaxAttributes _maxAttributes;
+    
+    public Attributes(MaxAttributes maxAttributes) : this(maxAttributes.Health, maxAttributes.Stamina, maxAttributes.Mana)
     {
-        _baseHealth = baseHealth;
-        _baseStamina = baseStamina;
-        _baseMana = baseMana;
+        _maxAttributes = maxAttributes;
     }
     
-    public Attributes(Attributes attributes) :
-        this(attributes._baseHealth, attributes._baseStamina, attributes._baseMana)
+    private Attributes(float health, float stamina, float mana)
     {
+        _health = health;
+        _stamina = stamina;
+        _mana = mana;
     }
 
-    public static Attributes Clamp(Attributes attributes, Attributes maxValues)
+    public void ChangeValues(float health, float stamina, float mana)
     {
-        return new Attributes(
-            Mathf.Clamp(attributes.Health, 0, maxValues.Health),
-            Mathf.Clamp(attributes.Stamina, 0, maxValues.Stamina),
-            Math.Clamp(attributes.Mana, 0, maxValues.Mana));
-    }
-
-    public void Refresh(MaxAttributes maxAttributes)
-    {
+        ChangeValue(ref _health, health, _maxAttributes.Health);
+        ChangeValue(ref _stamina, stamina, _maxAttributes.Stamina);
+        ChangeValue(ref _mana, mana, _maxAttributes.Mana);
         
+        OnCurrentAttributesChanged?.Invoke(this);
+        if (Health <= 0)
+        {
+            OnHealthOver?.Invoke();
+        }
     }
 
-    public void Add(Attributes attributes)
+    private void ChangeValue(ref float value, float addValue, float maxValue) => value = Mathf.Clamp(value + addValue, 0f, maxValue);
+    
+    public void ToMax()
     {
-        _baseHealth += attributes._baseHealth;
-        _baseStamina += attributes._baseStamina;
-        _baseMana += attributes._baseMana;
+        _health = _maxAttributes.Health;
+        _stamina = _maxAttributes.Stamina;
+        _mana = _maxAttributes.Mana;
     }
     
-    public void SetFrom(Attributes attributes)
+    private void Refresh()
     {
-        _baseHealth = attributes._baseHealth;
-        _baseStamina = attributes._baseStamina;
-        _baseMana = attributes._baseMana;
+        // ChangeHealth(_maxAttributes.Health * (GameConstants.BASE_HEALTH_RESTORE_PERCENTAGE_ON_NEXT_ROUND_STARTED +
+        //              _characteristics.GetCharacteristic(CharacteristicType.Endurance).Value * GameConstants.ADDITONAL_HEALTH_RESTORE_PERCENTAGE_ON_NEXT_ROUND_FROM_ENDURANCE +
+        //              _characteristics.GetCharacteristic(CharacteristicType.Willpower).Value * GameConstants.ADDITONAL_HEALTH_RESTORE_PERCENTAGE_ON_NEXT_ROUND_FROM_WILLPOWER));
+        //
+        // ChangeStamina(_maxAttributes.Stamina);
+        //
+        // ChangeMana(_maxAttributes.Mana * (GameConstants.BASE_MANA_RESTORE_PERCENTAGE_ON_NEXT_ROUND_STARTED +
+        //            _characteristics.GetCharacteristic(CharacteristicType.Endurance).Value * GameConstants.ADDITONAL_MANA_RESTORE_PERCENTAGE_ON_NEXT_ROUND_FROM_INTELLEGENCE +
+        //            _characteristics.GetCharacteristic(CharacteristicType.Willpower).Value * GameConstants.ADDITONAL_MANA_RESTORE_PERCENTAGE_ON_NEXT_ROUND_FROM_WILLPOWER));
     }
 }
