@@ -12,7 +12,7 @@ public class ActiveSkillsContainer
     private Character _owner;
     private ComboContainer _combo;
 
-    private Dictionary<ActiveSkill, Combination> _skills = new ();
+    private Dictionary<Combination, ActiveSkill> _skills = new ();
 
     public ActiveSkillsContainer(Character owner, ComboContainer combo)
     {
@@ -23,17 +23,17 @@ public class ActiveSkillsContainer
     public void AddSkill(Combination combination, ActiveSkill skill)
     {
         _combo.Register(combination);
-        _skills.Add(skill, combination);
+        _skills.Add(combination, skill);
 
         combination.OnCombinationExecuted += () => skill.Action(_owner, _battleController.GetEnemyFor(_owner));
     }
 
     public void RemoveSkill(ActiveSkill skill)
     {
-        _combo.Unregister(_skills[skill]);
-        _skills.Remove(skill);
-
-        _skills[skill].OnCombinationExecuted -= () => skill.Action(_owner, _battleController.GetEnemyFor(_owner));
+        // _combo.Unregister(_skills[skill]);
+        // _skills.Remove(skill);
+        //
+        // _skills[skill].OnCombinationExecuted -= () => skill.Action(_owner, _battleController.GetEnemyFor(_owner));
     }
     
     public override string ToString()

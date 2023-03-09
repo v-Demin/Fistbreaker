@@ -31,11 +31,11 @@ public class Character : MonoBehaviour
         Characteristics = new CharacteristicContainer(new List<BaseCharacteristic>()
         {
             new Strength(1),
-            new Agility(2),
-            new Endurance(3),
+            new Agility(200),
+            new Endurance(300),
             new Intelligence(4),
             new Willpower(5),
-            new Perception(6)
+            new Perception(60000)
         });
         
         Attributes = new AttributesContainer(new AttributesDataTransfer(Characteristics, new MaxAttributes(Characteristics)));
@@ -52,6 +52,9 @@ public class Character : MonoBehaviour
     private void DebugTest()
     {
         _activeSkills.AddSkill(new Combination(new List<InputKey>(){InputKey.Up}), _skill);
+        _activeSkills.AddSkill(new Combination(new List<InputKey>(){InputKey.Left}), _skill);
+        _activeSkills.AddSkill(new Combination(new List<InputKey>(){InputKey.Right}), _skill);
+        _activeSkills.AddSkill(new Combination(new List<InputKey>(){InputKey.Down}), _skill);
         _passiveSkills.AddSkill(_passiveSkill);
         $"{name}: {Attributes.CurrentAttributes.Stamina}, {Attributes.MaxAttributes.Stamina}".Log(Color.green);
     }

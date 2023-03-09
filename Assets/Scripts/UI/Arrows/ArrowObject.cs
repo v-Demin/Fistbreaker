@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class ArrowObject : MonoBehaviour
 {
-    [SerializeField] private float _duration;
+    [SerializeField] private float _speed;
     [SerializeField] private Ease _moveEase;
     [SerializeField] private Ease _scaleEase;
 
@@ -38,11 +38,12 @@ public class ArrowObject : MonoBehaviour
 
         var curve = isActiveState ? _activeStateScaleCurve : _passiveStateScaleCurve;
 
-        DOTween.To(() => 0f, value => transform.localScale = Vector3.one * curve.Evaluate(value), 1f, _duration)
+        DOTween.To(() => 0f, value => transform.localScale = Vector3.one * curve.Evaluate(value), 1f, Vector3.Magnitude(endPosition.position - startPosition.position) / _speed)
             .SetEase(_scaleEase);
         
-        transform.DOMove(endPosition.position, _duration)
+        transform.DOMove(endPosition.position, _speed)
             .SetEase(_moveEase)
+            .SetSpeedBased()
             .OnComplete(() => onComplete?.Invoke());
     }
 }
