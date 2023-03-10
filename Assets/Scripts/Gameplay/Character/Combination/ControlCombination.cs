@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Combination
+public class ControlCombination
 {
     public Action OnCombinationExecuted;
     
     private List<InputKey> _keys;
 
-    public Combination(List<InputKey> keys)
+    public ControlCombination(List<InputKey> keys)
     {
         _keys = keys;
     }
@@ -20,8 +20,8 @@ public class Combination
         action?.Invoke();
     }
 
-    public bool IsAccessable(Combination combination) =>  _keys.GetRange(0, combination._keys.Count).SequenceEqual(combination._keys);
-    public bool IsKeysEquals(Combination combination) => _keys.SequenceEqual(combination._keys);
+    public bool IsAccessable(ControlCombination controlCombination) =>  _keys.GetRange(0, controlCombination._keys.Count).SequenceEqual(controlCombination._keys);
+    public bool IsKeysEquals(ControlCombination controlCombination) => _keys.SequenceEqual(controlCombination._keys);
     public bool IsContains(InputKey key) => _keys.Contains(key);
     public int KeyCount => _keys.Count;
 

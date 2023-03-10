@@ -13,7 +13,7 @@ public class Character : MonoBehaviour
     private ActiveSkillsContainer _activeSkills;
     private PassiveSkillContainer _passiveSkills;
     private ExperienceContainer _exp;
-    private ComboContainer _combo;
+    private ControlContainer _control;
     private PowerContainer _power;
 
     [SerializeField] private bool ISTAKINGINPUT_TODELETE;
@@ -26,7 +26,7 @@ public class Character : MonoBehaviour
 
     private void Init()
     {
-        _combo = _container.Instantiate<ComboContainer>().Init(ISTAKINGINPUT_TODELETE);
+        _control = _container.Instantiate<ControlContainer>().Init(ISTAKINGINPUT_TODELETE);
         
         Characteristics = new CharacteristicContainer(new List<BaseCharacteristic>()
         {
@@ -40,7 +40,7 @@ public class Character : MonoBehaviour
         
         Attributes = new AttributesContainer(new AttributesDataTransfer(Characteristics, new MaxAttributes(Characteristics)));
         
-        _activeSkills = _container.Instantiate<ActiveSkillsContainer>(new List<object> {this, _combo});
+        _activeSkills = _container.Instantiate<ActiveSkillsContainer>(new List<object> {this, _control});
         _passiveSkills = new PassiveSkillContainer(this);
         _power = new PowerContainer(Attributes);
 
@@ -51,10 +51,10 @@ public class Character : MonoBehaviour
     [SerializeField] private PassiveSkill _passiveSkill;
     private void DebugTest()
     {
-        _activeSkills.AddSkill(new Combination(new List<InputKey>(){InputKey.Up}), _skill);
-        _activeSkills.AddSkill(new Combination(new List<InputKey>(){InputKey.Left}), _skill);
-        _activeSkills.AddSkill(new Combination(new List<InputKey>(){InputKey.Right}), _skill);
-        _activeSkills.AddSkill(new Combination(new List<InputKey>(){InputKey.Down}), _skill);
+        _activeSkills.AddSkill(new ControlCombination(new List<InputKey>(){InputKey.Up}), _skill);
+        _activeSkills.AddSkill(new ControlCombination(new List<InputKey>(){InputKey.Left}), _skill);
+        _activeSkills.AddSkill(new ControlCombination(new List<InputKey>(){InputKey.Right}), _skill);
+        _activeSkills.AddSkill(new ControlCombination(new List<InputKey>(){InputKey.Down}), _skill);
         _passiveSkills.AddSkill(_passiveSkill);
         $"{name}: {Attributes.CurrentAttributes.Stamina}, {Attributes.MaxAttributes.Stamina}".Log(Color.green);
     }

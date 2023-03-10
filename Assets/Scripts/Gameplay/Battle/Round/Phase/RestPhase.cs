@@ -1,6 +1,6 @@
 using DG.Tweening;
 
-public class ExecutionPhase : AbstractRoundPhase
+public class RestPhase : AbstractRoundPhase
 {
     public override void StartPhase()
     {

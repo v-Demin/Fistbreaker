@@ -1,7 +1,7 @@
 using UnityEngine;
 using Zenject;
 
-public class PreparationPhase : AbstractRoundPhase
+public class FightPhase : AbstractRoundPhase
 {
     [Inject] private readonly SPTimer _timer;
     [Inject] private readonly InputTaker _inputTaker;

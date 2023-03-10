@@ -14,8 +14,8 @@ public class Round
 
     public Round Init()
     {
-        _phases.Add(_container.Instantiate<PreparationPhase>());
-        _phases.Add(_container.Instantiate<ExecutionPhase>());
+        _phases.Add(_container.Instantiate<FightPhase>());
+        _phases.Add(_container.Instantiate<RestPhase>());
         return this;
     }
 

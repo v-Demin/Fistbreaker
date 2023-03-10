@@ -10,22 +10,22 @@ public class ActiveSkillsContainer
     [Inject] private readonly BattleController _battleController;
 
     private Character _owner;
-    private ComboContainer _combo;
+    private ControlContainer _control;
 
-    private Dictionary<Combination, ActiveSkill> _skills = new ();
+    private Dictionary<ControlCombination, ActiveSkill> _skills = new ();
 
-    public ActiveSkillsContainer(Character owner, ComboContainer combo)
+    public ActiveSkillsContainer(Character owner, ControlContainer control)
     {
         _owner = owner;
-        _combo = combo;
+        _control = control;
     }
     
-    public void AddSkill(Combination combination, ActiveSkill skill)
+    public void AddSkill(ControlCombination controlCombination, ActiveSkill skill)
     {
-        _combo.Register(combination);
-        _skills.Add(combination, skill);
+        _control.Register(controlCombination);
+        _skills.Add(controlCombination, skill);
 
-        combination.OnCombinationExecuted += () => skill.Action(_owner, _battleController.GetEnemyFor(_owner));
+        controlCombination.OnCombinationExecuted += () => skill.Action(_owner, _battleController.GetEnemyFor(_owner));
     }
 
     public void RemoveSkill(ActiveSkill skill)
