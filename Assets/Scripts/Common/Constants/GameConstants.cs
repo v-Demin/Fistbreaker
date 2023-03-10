@@ -6,7 +6,7 @@ public static class GameConstants
     public static float MANA_PER_INTELLIGENCE = 5f;
     
     public static float BASE_HEALTH = 30f;
-    public static float BASE_STAMINA = 5f;
+    public static float BASE_STAMINA = 25f;
     public static float BASE_MANA = 10f;
 
     public static float BASE_HEALTH_RESTORE_PERCENTAGE_ON_NEXT_ROUND_STARTED = 0.1f;

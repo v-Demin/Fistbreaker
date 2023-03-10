@@ -9,8 +9,8 @@ public class ArrowsView : MonoBehaviour
     [Inject] private readonly InputTaker _inputTaker;
 
     [SerializeField] private ArrowsFactory _factory;
-    [SerializeField] private RectTransform _startPosition;
-    [SerializeField] private RectTransform _endPosition;
+    [SerializeField] private RectTransform _arrowSpawnPosition;
+    [SerializeField] private RectTransform _arrowDespawnPosition;
     
     private void OnEnable()
     {
@@ -24,8 +24,8 @@ public class ArrowsView : MonoBehaviour
 
     private void ShowArrows(InputKey key)
     {
-        var arrow = _factory.CreateNewArrow(_startPosition);
+        var arrow = _factory.CreateNewArrow(_arrowSpawnPosition);
         arrow.Init(false, key);
-        arrow.PlayAnimation(_startPosition, _endPosition, false, () => _factory.ReturnToPool(arrow));
+        arrow.PlayAnimation(_arrowSpawnPosition, _arrowDespawnPosition, false, () => _factory.ReturnToPool(arrow));
     }
 }

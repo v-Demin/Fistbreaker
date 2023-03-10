@@ -31,11 +31,11 @@ public class Character : MonoBehaviour
         Characteristics = new CharacteristicContainer(new List<BaseCharacteristic>()
         {
             new Strength(1),
-            new Agility(200),
+            new Agility(2),
             new Endurance(300),
             new Intelligence(4),
             new Willpower(5),
-            new Perception(60000)
+            new Perception(6)
         });
         
         Attributes = new AttributesContainer(new AttributesDataTransfer(Characteristics, new MaxAttributes(Characteristics)));
