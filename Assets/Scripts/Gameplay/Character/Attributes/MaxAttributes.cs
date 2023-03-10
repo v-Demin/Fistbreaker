@@ -7,7 +7,7 @@ public class MaxAttributes
     public float Health => GameConstants.BASE_HEALTH +
                            _characteristics.GetCharacteristic(CharacteristicType.Endurance).Value * GameConstants.HEALTH_PER_ENDURANCE;
 
-    public float Stamina => GameConstants.BASE_STAMINA + 
+    public float Stamina => GameConstants.BASE_ROUND_DURATION + 
                             _characteristics.GetCharacteristic(CharacteristicType.Perception).Value * GameConstants.STAMINA_PER_PERCEPTION +
                             _characteristics.GetCharacteristic(CharacteristicType.Agility).Value * GameConstants.STAMINA_PER_AGILITY;
 

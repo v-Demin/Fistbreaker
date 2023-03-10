@@ -7,6 +7,7 @@ using Zenject;
 public class ArrowsView : MonoBehaviour
 {
     [Inject] private readonly InputTaker _inputTaker;
+    [Inject] private readonly RythmGameplayController _rythm;
 
     [SerializeField] private ArrowsFactory _factory;
     [SerializeField] private RectTransform _arrowSpawnPosition;
@@ -26,6 +27,6 @@ public class ArrowsView : MonoBehaviour
     {
         var arrow = _factory.CreateNewArrow(_arrowSpawnPosition);
         arrow.Init(false, key);
-        arrow.PlayAnimation(_arrowSpawnPosition, _arrowDespawnPosition, false, () => _factory.ReturnToPool(arrow));
+        arrow.Move(_rythm.Speed, _arrowSpawnPosition, _arrowDespawnPosition, false, () => _factory.ReturnToPool(arrow));
     }
 }

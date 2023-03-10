@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class ArrowObject : MonoBehaviour
 {
-    [SerializeField] private float _speed;
     [SerializeField] private Ease _moveEase;
     [SerializeField] private Ease _scaleEase;
 
@@ -32,16 +31,16 @@ public class ArrowObject : MonoBehaviour
         _downDirectionRoot.SetActive(direction == InputKey.Down);
     }
     
-    public void PlayAnimation(RectTransform startPosition, RectTransform endPosition, bool isActiveState, Action onComplete = null)
+    public void Move(float speed, RectTransform startPosition, RectTransform endPosition, bool isActiveState, Action onComplete = null)
     {
         transform.position = startPosition.position;
 
         var curve = isActiveState ? _activeStateScaleCurve : _passiveStateScaleCurve;
 
-        DOTween.To(() => 0f, value => transform.localScale = Vector3.one * curve.Evaluate(value), 1f, Vector3.Magnitude(endPosition.position - startPosition.position) / _speed)
+        DOTween.To(() => 0f, value => transform.localScale = Vector3.one * curve.Evaluate(value), 1f, Vector3.Magnitude(endPosition.position - startPosition.position) / speed)
             .SetEase(_scaleEase);
         
-        transform.DOMove(endPosition.position, _speed)
+        transform.DOMove(endPosition.position, speed)
             .SetEase(_moveEase)
             .SetSpeedBased()
             .OnComplete(() => onComplete?.Invoke());

@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 553684000d1ff6d4cbcfaea87395d30c, type: 3}
+  m_Name: BaseRythmSequence 2
+  m_EditorClassIdentifier: 
+  _info:
+  - 1.9500475
+  - 2.380824
+  - 2.6930447
+  - 3.240821
+  - 5.1375475
+  - 6.6161857
+  - 7.416116
+  - 9.621624
+  - 10.37937
+  - 13.67588
+  - 13.966927
+  - 14.325989
+  - 15.235013
+  - 16.198168
+  - 16.70814
+  - 18.607458
+  - 20.832283
+  - 21.132761
+  - 21.540499
+  - 23.581905
+  _BPMforSeparate: 4
