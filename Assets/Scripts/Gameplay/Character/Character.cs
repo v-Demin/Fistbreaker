@@ -32,7 +32,7 @@ public class Character : MonoBehaviour
         {
             new Strength(1),
             new Agility(2),
-            new Endurance(300),
+            new Endurance(6),
             new Intelligence(4),
             new Willpower(5),
             new Perception(6)
@@ -56,6 +56,5 @@ public class Character : MonoBehaviour
         _activeSkills.AddSkill(new ControlCombination(new List<InputKey>(){InputKey.Right}), _skill);
         _activeSkills.AddSkill(new ControlCombination(new List<InputKey>(){InputKey.Down}), _skill);
         _passiveSkills.AddSkill(_passiveSkill);
-        $"{name}: {Attributes.CurrentAttributes.Stamina}, {Attributes.MaxAttributes.Stamina}".Log(Color.green);
     }
 }

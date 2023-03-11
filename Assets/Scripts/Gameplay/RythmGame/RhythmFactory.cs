@@ -2,12 +2,12 @@ using System.Collections.Generic;
 using ModestTree;
 using UnityEngine;
 
-public class RythmFactory : MonoBehaviour
+public class RhythmFactory : MonoBehaviour
 {
-    [SerializeField] private RythmMoveObject _prefab;
+    [SerializeField] private RhythmMoveObject _prefab;
     [SerializeField] private RectTransform _baseParent;
 
-    private Queue<RythmMoveObject> _arrowsPool = new ();
+    private Queue<RhythmMoveObject> _arrowsPool = new ();
 
     private void Start()
     {
@@ -17,21 +17,22 @@ public class RythmFactory : MonoBehaviour
         }
     }
 
-    public RythmMoveObject CreateNewMoveObject(RectTransform position)
+    public RhythmMoveObject CreateNewMoveObject(RectTransform position)
     {
         return CreateNewMoveObjectInner(position);
     }
 
-    private RythmMoveObject CreateNewMoveObjectInner(RectTransform position, bool takeFromPool = true)
+    private RhythmMoveObject CreateNewMoveObjectInner(RectTransform position, bool takeFromPool = true)
     {
         var toReturn = _arrowsPool.IsEmpty() || !takeFromPool ? Instantiate(_prefab, position) : _arrowsPool.Dequeue();
         toReturn.gameObject.SetActive(true);
+        toReturn.ChangeActiveState(RhythmMoveObject.ActiveStateType.Created);
         toReturn.transform.SetParent(position);
         toReturn.transform.SetAsLastSibling();
         return toReturn;
     }
 
-    public void ReturnToPool(RythmMoveObject arrow)
+    public void ReturnToPool(RhythmMoveObject arrow)
     {
         arrow.gameObject.SetActive(false);
         _arrowsPool.Enqueue(arrow);

@@ -14,13 +14,13 @@ public class ControlContainer : IDisposable
     public ControlContainer Init(bool isTakingInput)
     {
         isTakingInput_TODELETE = isTakingInput;
-        _inputTaker.OnKeyUpdate += OnKeyUpdated;
+        _inputTaker.KeyUpdate += OnKeyUpdated;
         return this;
     }
 
     public void Dispose()
     {
-        _inputTaker.OnKeyUpdate -= OnKeyUpdated;
+        _inputTaker.KeyUpdate -= OnKeyUpdated;
     }
 
     public void Register(ControlCombination controlCombination)

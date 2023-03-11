@@ -5,8 +5,8 @@ using Zenject;
 
 public class InputTaker : MonoBehaviour
 {
-    public Action<List<InputKey>> OnKeyUpdate;
-    public Action OnKeyReset;
+    public Action<List<InputKey>> KeyUpdate;
+    public Action KeyReset;
 
     private bool _isInputAvailable = true;
     private List<InputKey> _keys = new ();
@@ -24,7 +24,7 @@ public class InputTaker : MonoBehaviour
     {
         if (_isInputAvailable && UpdateKeys())
         {
-            OnKeyUpdate?.Invoke(_keys);
+            KeyUpdate?.Invoke(_keys);
         };
     }
 
@@ -47,6 +47,6 @@ public class InputTaker : MonoBehaviour
     public void ResetKeys()
     {
         _keys.Clear();
-        OnKeyReset?.Invoke();
+        KeyReset?.Invoke();
     }
 }
