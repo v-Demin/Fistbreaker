@@ -1,5 +1,4 @@
 using System;
-using UnityEngine;
 
 public class Combo
 {
@@ -10,6 +9,11 @@ public class Combo
     private int _comboCurrentRound;
     private int _maxComboCurrentRound;
 
+    public Combo()
+    {
+        Round.OnRoundEnd += OnRoundEnd;
+    }
+
     public void AddOne()
     {
         _comboCurrentRound++;
@@ -17,9 +21,9 @@ public class Combo
         ComboUpdate?.Invoke(CurrentCombo);
     }
 
-    public void ResetToLastMax()
+    public void ResetCurrent()
     {
-        _comboCurrentRound = _maxComboLastRound;
+        _comboCurrentRound = 0;
         ComboUpdate?.Invoke(CurrentCombo);
     }
 

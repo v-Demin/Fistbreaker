@@ -14,20 +14,17 @@ public class RhythmGameplayController : MonoBehaviour
 
     public void OnObjectHit()
     {
-        $"Попел".Log(Color.red);
         _battle.PlayerSideCombo.AddOne();
     }
     
     public void OnObjectMiss()
     {
-        $"Пропустил".Log(Color.red);
-        _battle.PlayerSideCombo.ResetToLastMax();
+        _battle.PlayerSideCombo.ResetCurrent();
     }
 
     public void OnKeyMiss()
     {
-        $"Акелла промахнулся".Log(Color.red);
-        _battle.PlayerSideCombo.ResetToLastMax();
+        _battle.PlayerSideCombo.ResetCurrent();
     }
 
     private void Start()

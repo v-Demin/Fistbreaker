@@ -8,7 +8,7 @@ public class Round
 {
     [Inject] private readonly DiContainer _container;
 
-    public Action OnRoundEnd;
+    public static Action OnRoundEnd;
     
     private List<AbstractRoundPhase> _phases = new ();
 
