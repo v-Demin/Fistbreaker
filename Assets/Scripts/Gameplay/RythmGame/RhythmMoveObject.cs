@@ -6,16 +6,39 @@ public class RhythmMoveObject : MonoBehaviour
 {
     [SerializeField] private Ease _moveEase;
 
-    [SerializeField] private GameObject _createdStateRoot;
-    [SerializeField] private GameObject _hitStateRoot;
-    [SerializeField] private GameObject _missedStateRoot;
+    [SerializeField] private AbstractVisualObject _createdStateVisualObject;
+    [SerializeField] private AbstractVisualObject _hitStateVisualObject;
+    [SerializeField] private AbstractVisualObject _missedStateVisualObject;
     
 
     public void ChangeActiveState(ActiveStateType value)
     {
-        _createdStateRoot.SetActive(value == ActiveStateType.Created);
-        _hitStateRoot.SetActive(value == ActiveStateType.Hit);
-        _missedStateRoot.SetActive(value == ActiveStateType.Missed);
+        if (value == ActiveStateType.Created)
+        {
+            _createdStateVisualObject.Show();
+        }
+        else
+        {
+            _createdStateVisualObject.Hide();
+        }
+        
+        if (value == ActiveStateType.Hit)
+        {
+            _hitStateVisualObject.Show();
+        }
+        else
+        {
+            _hitStateVisualObject.Hide();
+        }
+        
+        if (value == ActiveStateType.Missed)
+        {
+            _missedStateVisualObject.Show();
+        }
+        else
+        {
+            _missedStateVisualObject.Hide();
+        }
     }
     
     public void Move(float speed, RectTransform startPosition, RectTransform endPosition, Action onComplete = null)

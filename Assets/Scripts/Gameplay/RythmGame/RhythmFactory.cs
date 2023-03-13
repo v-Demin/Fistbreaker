@@ -26,9 +26,9 @@ public class RhythmFactory : MonoBehaviour
     {
         var toReturn = _arrowsPool.IsEmpty() || !takeFromPool ? Instantiate(_prefab, position) : _arrowsPool.Dequeue();
         toReturn.gameObject.SetActive(true);
-        toReturn.ChangeActiveState(RhythmMoveObject.ActiveStateType.Created);
         toReturn.transform.SetParent(position);
         toReturn.transform.SetAsLastSibling();
+        toReturn.ChangeActiveState(RhythmMoveObject.ActiveStateType.Created);
         return toReturn;
     }
 

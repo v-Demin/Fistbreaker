@@ -8,7 +8,7 @@ using Random = Unity.Mathematics.Random;
 [CreateAssetMenu]
 public class RythmSequence : ScriptableObject
 {
-    [SerializeField] [Range(0f, 25f)] private List<float> _info;
+    [SerializeField] [Range(0f, 23f)] private List<float> _info;
     [SerializeField] private int _BPMforSeparate = 80;
     private float SeparateValue => 1 / (float)_BPMforSeparate;
 
@@ -37,7 +37,7 @@ public class RythmSequence : ScriptableObject
     {
         for (int i = 0; i < _info.Count - 1; i++)
         {
-            _info[i] = UnityEngine.Random.Range(0f, 24f);
+            _info[i] = UnityEngine.Random.Range(0f, 23f);
         }
         
         Separate();
