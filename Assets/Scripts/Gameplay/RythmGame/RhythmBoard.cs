@@ -11,6 +11,7 @@ public class RhythmBoard : MonoBehaviour
     [Inject] private readonly InputTaker _input;
 
     [SerializeField] [Range(0.2f, 2.5f)] private float _distance;
+    [SerializeField] [Range(-1f, 1f)] private float _offcet;
     [SerializeField] private RectTransform _endPoint;
     [SerializeField] private RectTransform _midPoint;
     [SerializeField] private RectTransform _startPoint;
@@ -22,11 +23,11 @@ public class RhythmBoard : MonoBehaviour
         _rhythmObjects.OrderBy(obj => obj.transform.position.x).Take(1).First();
 
     private bool IsObjectHitMidpoint(Component obj) =>
-        obj.transform.position.x <= _midPoint.position.x + _distance &&
-        obj.transform.position.x >= _midPoint.position.x - _distance;
+        obj.transform.position.x <= _midPoint.position.x + _offcet + _distance &&
+        obj.transform.position.x >= _midPoint.position.x + _offcet - _distance;
     
     private bool IsObjectMissMidpoint(Component obj) =>
-        obj.transform.position.x <= _midPoint.position.x - _distance;
+        obj.transform.position.x <= _midPoint.position.x + _offcet - _distance;
 
     private void OnEnable()
     {
@@ -79,6 +80,6 @@ public class RhythmBoard : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = new Color(0.5f, 0.1f, 0.1f, 0.5f);
-        Gizmos.DrawSphere(_midPoint.position, _distance);
+        Gizmos.DrawSphere(_midPoint.position.WithAddX(_offcet), _distance);
     }
 }
