@@ -26,6 +26,6 @@ public class DealDamageActiveSkillAction : AbstractActiveSkillAction
         
         $"Исходящий урон {damage}".Log(Color.green);
         
-        enemy.Attributes.CurrentAttributes.ChangeValues(damage, 0f, 0f);
+        enemy.Attributes.CurrentAttributes.ChangeValues(damage, 0f);
     }
 }

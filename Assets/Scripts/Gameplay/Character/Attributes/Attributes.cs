@@ -25,7 +25,7 @@ public class Attributes
         _mana = mana;
     }
 
-    public void ChangeValues(float health, float stamina, float mana)
+    public void ChangeValues(float health, float mana)
     {
         ChangeValue(ref _health, health, _maxAttributes.Health);
         ChangeValue(ref _mana, mana, _maxAttributes.Mana);
