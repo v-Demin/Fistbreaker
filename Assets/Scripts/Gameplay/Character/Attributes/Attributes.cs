@@ -7,31 +7,27 @@ public class Attributes
     public Action OnHealthOver;
 
     private float _health;
-    private float _stamina;
     private float _mana;
 
     public float Health => _health;
-    public float Stamina => _stamina;
     public float Mana => _mana;
     
     private MaxAttributes _maxAttributes;
     
-    public Attributes(MaxAttributes maxAttributes) : this(maxAttributes.Health, maxAttributes.Stamina, maxAttributes.Mana)
+    public Attributes(MaxAttributes maxAttributes) : this(maxAttributes.Health, maxAttributes.Mana)
     {
         _maxAttributes = maxAttributes;
     }
     
-    private Attributes(float health, float stamina, float mana)
+    private Attributes(float health, float mana)
     {
         _health = health;
-        _stamina = stamina;
         _mana = mana;
     }
 
     public void ChangeValues(float health, float stamina, float mana)
     {
         ChangeValue(ref _health, health, _maxAttributes.Health);
-        ChangeValue(ref _stamina, stamina, _maxAttributes.Stamina);
         ChangeValue(ref _mana, mana, _maxAttributes.Mana);
         
         OnCurrentAttributesChanged?.Invoke(this);
@@ -46,7 +42,6 @@ public class Attributes
     public void ToMax()
     {
         _health = _maxAttributes.Health;
-        _stamina = _maxAttributes.Stamina;
         _mana = _maxAttributes.Mana;
     }
     

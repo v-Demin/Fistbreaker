@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Zenject;
 
@@ -7,6 +8,9 @@ public class FightPhase : AbstractRoundPhase
     [Inject] private readonly InputTaker _inputTaker;
     [Inject] private readonly BattleController _battleController;
 
+    public static Action FightPhaseStarted;
+    public static Action FightPhaseEnded;
+
     private BattleSide PlayerSide => _battleController.PlayerSide;
     private BattleSide EnemySide => _battleController.EnemySide;
     
@@ -14,12 +18,13 @@ public class FightPhase : AbstractRoundPhase
     public override void StartPhase()
     {
         $"Фаза {GetType()} стартанула".Log(Color.cyan);
-        _timer.StartTimer(PlayerSide.CurrentBattleCharacter.Attributes.CurrentAttributes.Stamina);
+        _timer.StartTimer(GameConstants.BASE_ROUND_DURATION);
         _inputTaker.ChangeInputAvailability(true);
 
         _timer.OnTimerEnded += EndPhase;
         PlayerSide.OnAllCharactersDefeated += EndPhase;
         EnemySide.OnAllCharactersDefeated += EndPhase;
+        FightPhaseStarted?.Invoke();
     }
 
     public override void EndPhase()
@@ -30,6 +35,8 @@ public class FightPhase : AbstractRoundPhase
         _timer.OnTimerEnded -= EndPhase;
         PlayerSide.OnAllCharactersDefeated -= EndPhase;
         EnemySide.OnAllCharactersDefeated -= EndPhase;
+        
+        FightPhaseEnded?.Invoke();
         
         base.EndPhase();
     }
