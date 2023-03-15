@@ -10,7 +10,22 @@ public class RhythmGameplayController : MonoBehaviour
     public Action TimeKeyInvoke;
     
     [field: SerializeField] public float Speed { get; private set; }
-    [SerializeField] private RythmSequence _sequence;
+    [SerializeField] private RythmSequence _rythmSequence;
+    private Sequence _tweenSequence;
+    
+    public void StartGameplay()
+    {
+        _tweenSequence = DOTween.Sequence();
+        _rythmSequence.Timings.ForEach(value =>
+        {
+            _tweenSequence.InsertCallback(value, () => TimeKeyInvoke?.Invoke());
+        });
+    }
+
+    public void EndGameplay()
+    {
+        _tweenSequence?.Kill();
+    }
 
     public void OnObjectHit()
     {
@@ -25,14 +40,5 @@ public class RhythmGameplayController : MonoBehaviour
     public void OnKeyMiss()
     {
         _battle.PlayerSideCombo.ResetCurrent();
-    }
-
-    private void Start()
-    {
-        var sequence = DOTween.Sequence();
-        _sequence.Timings.ForEach(value =>
-        {
-            sequence.InsertCallback(value, () => TimeKeyInvoke?.Invoke());
-        });
     }
 }

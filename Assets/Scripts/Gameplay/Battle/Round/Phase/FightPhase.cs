@@ -7,6 +7,7 @@ public class FightPhase : AbstractRoundPhase
     [Inject] private readonly SPTimer _timer;
     [Inject] private readonly InputTaker _inputTaker;
     [Inject] private readonly BattleController _battleController;
+    [Inject] private readonly RhythmGameplayController _rhythmGameplay;
 
     public static Action FightPhaseStarted;
     public static Action FightPhaseEnded;
@@ -20,6 +21,7 @@ public class FightPhase : AbstractRoundPhase
         $"Фаза {GetType()} стартанула".Log(Color.cyan);
         _timer.StartTimer(GameConstants.BASE_ROUND_DURATION);
         _inputTaker.ChangeInputAvailability(true);
+        _rhythmGameplay.StartGameplay();
 
         _timer.OnTimerEnded += EndPhase;
         PlayerSide.OnAllCharactersDefeated += EndPhase;
@@ -31,6 +33,7 @@ public class FightPhase : AbstractRoundPhase
     {
         _timer.Stop();
         _inputTaker.ChangeInputAvailability(false);
+        _rhythmGameplay.EndGameplay();
 
         _timer.OnTimerEnded -= EndPhase;
         PlayerSide.OnAllCharactersDefeated -= EndPhase;

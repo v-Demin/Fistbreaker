@@ -802,7 +802,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Speed>k__BackingField: 5
-  _sequence: {fileID: 11400000, guid: 0488df68609df8745a6c983057f97219, type: 2}
+  _rythmSequence: {fileID: 11400000, guid: 0488df68609df8745a6c983057f97219, type: 2}
 --- !u!114 &1135750672
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1285,11 +1285,11 @@ PrefabInstance:
       objectReference: {fileID: 38133858}
     - target: {fileID: 136151237373557839, guid: efafb12985af8ea44878a83186641085, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -91.99805
+      value: -91.998055
       objectReference: {fileID: 0}
     - target: {fileID: 763418688217420583, guid: efafb12985af8ea44878a83186641085, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -91.99805
+      value: -91.998055
       objectReference: {fileID: 0}
     - target: {fileID: 9212048645252907546, guid: efafb12985af8ea44878a83186641085, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -1409,11 +1409,11 @@ PrefabInstance:
       objectReference: {fileID: 45657817}
     - target: {fileID: 136151237373557839, guid: efafb12985af8ea44878a83186641085, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -91.99805
+      value: -91.998055
       objectReference: {fileID: 0}
     - target: {fileID: 763418688217420583, guid: efafb12985af8ea44878a83186641085, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -91.99805
+      value: -91.998055
       objectReference: {fileID: 0}
     - target: {fileID: 9212048645252907546, guid: efafb12985af8ea44878a83186641085, type: 3}
       propertyPath: m_AnchoredPosition.x

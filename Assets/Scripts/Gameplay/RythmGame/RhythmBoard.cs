@@ -65,7 +65,7 @@ public class RhythmBoard : MonoBehaviour
         }
     }
 
-    public void CreateNewObject()
+    private void CreateNewObject()
     {
         var obj = _factory.CreateNewMoveObject(_startPoint);
         _rhythmObjects.Add(obj);
