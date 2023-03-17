@@ -24,8 +24,8 @@ public class FightPhase : AbstractRoundPhase
         _rhythmGameplay.StartGameplay();
 
         _timer.OnTimerEnded += EndPhase;
-        PlayerSide.OnAllCharactersDefeated += EndPhase;
-        EnemySide.OnAllCharactersDefeated += EndPhase;
+        PlayerSide.AllCharactersDefeated += EndPhase;
+        EnemySide.AllCharactersDefeated += EndPhase;
         FightPhaseStarted?.Invoke();
     }
 
@@ -36,8 +36,8 @@ public class FightPhase : AbstractRoundPhase
         _rhythmGameplay.EndGameplay();
 
         _timer.OnTimerEnded -= EndPhase;
-        PlayerSide.OnAllCharactersDefeated -= EndPhase;
-        EnemySide.OnAllCharactersDefeated -= EndPhase;
+        PlayerSide.AllCharactersDefeated -= EndPhase;
+        EnemySide.AllCharactersDefeated -= EndPhase;
         
         FightPhaseEnded?.Invoke();
         

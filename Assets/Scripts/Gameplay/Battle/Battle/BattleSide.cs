@@ -2,14 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using Zenject;
 
 [System.Serializable]
 public class BattleSide
 {
-    [Inject] private readonly GameCycleController _cycleController;
-
-    public Action OnAllCharactersDefeated;
+    public Action AllCharactersDefeated;
+    public Action<Character> CharacterChanges;
     
     //[Todo]: учёт побеждённых персонажей
     public Character CurrentBattleCharacter => _characters.FirstOrDefault();
@@ -20,7 +18,17 @@ public class BattleSide
     public BattleSide(List<Character> characters)
     {
         _characters = characters;
-        //_cycleController.OnRoundEnded += i => SetNextCharacterAsCurrent();
+        _characters.ForEach(character => character.Init());
+        EnableCurrentCharacter();
+        
+        Round.OnRoundEnd += SetNextCharacterAsCurrent;
+        CharacterChanges += character => EnableCurrentCharacter();
+    }
+
+    private void EnableCurrentCharacter()
+    {
+        _characters.ForEach(character => character.Disable());
+        CurrentBattleCharacter.Enable();
     }
 
     private void SetNextCharacterAsCurrent()
@@ -28,6 +36,7 @@ public class BattleSide
         if (_characters.Count > 1)
         {
             _characters.ShiftLeft(1);
+            CharacterChanges?.Invoke(CurrentBattleCharacter);
         }
     }
 }

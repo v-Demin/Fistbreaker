@@ -4,21 +4,18 @@ using System.Linq;
 using UnityEngine;
 using Zenject;
 
-public class ControlContainer : IDisposable
+public class ControlContainer: IEnablable
 {
     [Inject] private readonly InputTaker _inputTaker;
     
     private List<ControlCombination> _combinations = new ();
-    private bool isTakingInput_TODELETE = false;
 
-    public ControlContainer Init(bool isTakingInput)
+    public void Enable()
     {
-        isTakingInput_TODELETE = isTakingInput;
         _inputTaker.KeyUpdate += OnKeyUpdated;
-        return this;
     }
 
-    public void Dispose()
+    public void Disable()
     {
         _inputTaker.KeyUpdate -= OnKeyUpdated;
     }
@@ -35,8 +32,6 @@ public class ControlContainer : IDisposable
 
     private void OnKeyUpdated(List<InputKey> keyList)
     {
-        if(isTakingInput_TODELETE == false) return;
-        
         if(keyList.Count == 0) return;
 
         var combinationToCheck = new ControlCombination(keyList);

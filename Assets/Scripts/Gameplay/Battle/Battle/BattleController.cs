@@ -1,12 +1,16 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class BattleController : MonoBehaviour
 {
-    [field: SerializeField] public BattleSide PlayerSide { get; private set; }
+    public BattleSide PlayerSide { get; private set; }
     public Combo PlayerSideCombo { get; private set; }
-    [field: SerializeField] public BattleSide EnemySide { get; private set; }
+    public BattleSide EnemySide { get; private set; }
     public Combo EnemySideCombo { get; private set; }
+    
+    [SerializeField] private List<Character> _playerCharacters;
+    [SerializeField] private List<Character> _enemyCharacters;
 
     public Action OnSideDefeated;
     
@@ -14,6 +18,9 @@ public class BattleController : MonoBehaviour
 
     private void Start()
     {
+        PlayerSide = new BattleSide(_playerCharacters);
+        EnemySide = new BattleSide(_enemyCharacters);
+        
         PlayerSideCombo = new Combo();
         EnemySideCombo = new Combo();
     }

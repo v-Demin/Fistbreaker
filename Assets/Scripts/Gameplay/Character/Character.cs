@@ -2,10 +2,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-public class Character : MonoBehaviour
+public class Character : MonoBehaviour, IEnablable
 {
     [Inject] private readonly DiContainer _container;
-    
 
     public AttributesContainer Attributes;
     public CharacteristicContainer Characteristics;
@@ -16,17 +15,9 @@ public class Character : MonoBehaviour
     private ControlContainer _control;
     private PowerContainer _power;
 
-    [SerializeField] private bool ISTAKINGINPUT_TODELETE;
-    
-
-    private void Start()
+    public void Init()
     {
-        Init();
-    }
-
-    private void Init()
-    {
-        _control = _container.Instantiate<ControlContainer>().Init(ISTAKINGINPUT_TODELETE);
+        _control = _container.Instantiate<ControlContainer>();
         
         Characteristics = new CharacteristicContainer(new List<BaseCharacteristic>()
         {
@@ -45,6 +36,16 @@ public class Character : MonoBehaviour
         _power = new PowerContainer(Attributes);
 
         DebugTest();
+    }
+
+    public void Enable()
+    {
+        _control.Enable();
+    }
+
+    public void Disable()
+    {
+        _control.Disable();
     }
     
     [SerializeField] private ActiveSkill _skill;
