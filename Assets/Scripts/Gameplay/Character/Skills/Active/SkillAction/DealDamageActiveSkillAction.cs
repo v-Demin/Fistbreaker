@@ -17,6 +17,11 @@ public class DealDamageActiveSkillAction : AbstractActiveSkillAction
 
     public override void Execute(Character owner, Character enemy)
     {
+        DealDamage(owner, enemy);
+    }
+
+    protected void DealDamage(Character owner, Character enemy)
+    {
         float damage = -_baseDamage + _damageMuliplier * owner.Attributes.DamageModifyer(_damageCharacteric);
         if (IsCritApplied(_baseCritChance + _critChanceMuliplier * owner.Attributes.BaseCritChance(_critChanceCharacteristic)))
         {
