@@ -6,7 +6,7 @@ public static class GameConstants
     public static float BASE_HEALTH = 30f;
     public static float BASE_MANA = 10f;
     
-    public static float BASE_ROUND_DURATION = 1.4f;
+    public static float BASE_ROUND_DURATION = 25f;
 
     public static float BASE_HEALTH_RESTORE_PERCENTAGE_ON_NEXT_ROUND_STARTED = 0.1f;
     public static float ADDITONAL_HEALTH_RESTORE_PERCENTAGE_ON_NEXT_ROUND_FROM_ENDURANCE = 0.005f;

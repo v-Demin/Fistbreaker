@@ -25,7 +25,7 @@ public class ActiveSkillsContainer
         _control.Register(controlCombination);
         _skills.Add(controlCombination, skill);
 
-        controlCombination.OnCombinationExecuted += () => skill.Action(_owner, _battleController.GetEnemyFor(_owner));
+        controlCombination.OnCombinationExecuted += () => skill.Action(_owner, _battleController.GetCombo(_owner), _battleController.GetEnemyFor(_owner));
     }
 
     public void RemoveSkill(ActiveSkill skill)

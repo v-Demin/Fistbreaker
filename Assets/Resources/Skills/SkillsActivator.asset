@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8136f1842c2f02d458b888f86a566865, type: 3}
+  m_Name: SkillsActivator
+  m_EditorClassIdentifier: 
+  _activeSkills:
+  - {fileID: 11400000, guid: c0c7f9cb8318c434aa1fd8b474a05ee9, type: 2}
+  - {fileID: 11400000, guid: 705d17621fed26a49b86e3d8166a15ff, type: 2}
+  _passiveSkills:
+  - {fileID: 11400000, guid: 5138f1d2d97011345b363bb4f742e658, type: 2}
+  - {fileID: 11400000, guid: 97d02bbaf61b3a14eb30bf54fa7287f4, type: 2}

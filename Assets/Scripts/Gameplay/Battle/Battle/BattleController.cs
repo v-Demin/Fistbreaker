@@ -14,8 +14,6 @@ public class BattleController : MonoBehaviour
     
     [SerializeField] private List<Character> _playerCharacters;
     [SerializeField] private List<Character> _enemyCharacters;
-
-
     
     //[Todo]: загрузка нужных персонажей в нужном количестве
 
@@ -29,6 +27,22 @@ public class BattleController : MonoBehaviour
         
         PlayerSideCombo = new Combo();
         EnemySideCombo = new Combo();
+    }
+
+    public int GetCombo(Character character)
+    {
+        if (PlayerSide.Contains(character))
+        {
+            return PlayerSideCombo.CurrentCombo;
+        }
+
+        if (EnemySide.Contains(character))
+        {
+            return EnemySideCombo.CurrentCombo;
+        }
+
+        if (character == null) throw new ArgumentException($"Данный персонаж - null: {character}");
+        throw new ArgumentException($"Данный персонаж не состоит ни в одной стороне данный битвы: {character}");
     }
 
     public Character GetEnemyFor(Character character)
