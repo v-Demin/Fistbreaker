@@ -17,11 +17,11 @@ MonoBehaviour:
     <AvailableAtCombo>k__BackingField: 0
     _actions:
     - {fileID: 11400000, guid: 132491e9a65032445b2759c7b14bdbd3, type: 2}
-  - _name: 'ComboLevel: 2 - 1'
-    <AvailableAtCombo>k__BackingField: 1
+  - _name: 'ComboLevel: 2 - 20'
+    <AvailableAtCombo>k__BackingField: 20
     _actions:
     - {fileID: 11400000, guid: f9f70579d3c51744d9a56ce55e156f2d, type: 2}
-  - _name: 'ComboLevel: 3 - 2'
-    <AvailableAtCombo>k__BackingField: 2
+  - _name: 'ComboLevel: 3 - 50'
+    <AvailableAtCombo>k__BackingField: 50
     _actions:
     - {fileID: 11400000, guid: 45415f69c72c7274d9e85765c314922b, type: 2}
