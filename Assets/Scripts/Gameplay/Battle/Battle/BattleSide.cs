@@ -1,42 +1,60 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
+using ModestTree;
 
-[System.Serializable]
 public class BattleSide
 {
-    public Action AllCharactersDefeated;
-    public Action<Character> CharacterChanges;
+    public event Action AllCharactersDefeated;
+    public event Action<Character> CharacterDefeated;
+    public event Action<Character> CharacterChanges;
     
-    //[Todo]: учёт побеждённых персонажей
+    private List<Character> _characters = new ();
+        
     public Character CurrentBattleCharacter => _characters.FirstOrDefault();
     public bool Contains(Character character) => _characters.Contains(character);
-    
-    [SerializeField] private List<Character> _characters;
     
     public BattleSide(List<Character> characters)
     {
         _characters = characters;
         _characters.ForEach(character => character.Init());
+
         EnableCurrentCharacter();
+
+        _characters.ForEach(character =>
+            character.Attributes.CurrentAttributes.OnHealthOver += () => CharacterDefeated?.Invoke(character));
         
-        Round.OnRoundEnd += SetNextCharacterAsCurrent;
-        CharacterChanges += character => EnableCurrentCharacter();
+        Round.OnRoundEnd += () =>
+        {
+            SetNextCharacterAsCurrent();
+            DefeatCharacters();
+        };
+    }
+    
+    private void DefeatCharacters()
+    {
+        _characters.RemoveAll(character => character.Attributes.CurrentAttributes.Health <= 0);
+        
+        if (_characters.IsEmpty())
+        {
+            AllCharactersDefeated?.Invoke();
+        }
     }
 
     private void EnableCurrentCharacter()
     {
+        if (_characters.IsEmpty()) return;
+
         _characters.ForEach(character => character.Disable());
         CurrentBattleCharacter.Enable();
     }
 
     private void SetNextCharacterAsCurrent()
     {
-        if (_characters.Count > 1)
-        {
-            _characters.ShiftLeft(1);
-            CharacterChanges?.Invoke(CurrentBattleCharacter);
-        }
+        if (_characters.IsEmpty()) return;
+
+        _characters.ShiftLeft(1);
+        CharacterChanges?.Invoke(CurrentBattleCharacter);
+        EnableCurrentCharacter();
     }
 }

@@ -4,7 +4,7 @@ using System.Linq;
 using ModestTree;
 using Zenject;
 
-public class Round
+public class Round : IEnablable
 {
     [Inject] private readonly DiContainer _container;
 
@@ -18,12 +18,18 @@ public class Round
         _phases.Add(_container.Instantiate<RestPhase>());
         return this;
     }
-
-    public void StartRound()
+    
+    public void Enable()
     {
         StartNextPhase();
     }
-    
+
+    public void Disable()
+    {
+        _phases.ForEach(phase => phase.EndPhase());
+        _phases.Clear();
+    }
+
     private void StartNextPhase()
     {
         if (_phases.IsEmpty())

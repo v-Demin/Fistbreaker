@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class BattleController : MonoBehaviour
 {
+    public event Action PlayerSideDefeated;
+    public event Action EnemySideDefeated;
+    
     public BattleSide PlayerSide { get; private set; }
     public Combo PlayerSideCombo { get; private set; }
     public BattleSide EnemySide { get; private set; }
@@ -12,7 +15,7 @@ public class BattleController : MonoBehaviour
     [SerializeField] private List<Character> _playerCharacters;
     [SerializeField] private List<Character> _enemyCharacters;
 
-    public Action OnSideDefeated;
+
     
     //[Todo]: загрузка нужных персонажей в нужном количестве
 
@@ -20,6 +23,9 @@ public class BattleController : MonoBehaviour
     {
         PlayerSide = new BattleSide(_playerCharacters);
         EnemySide = new BattleSide(_enemyCharacters);
+
+        PlayerSide.AllCharactersDefeated += () => PlayerSideDefeated.Invoke();
+        EnemySide.AllCharactersDefeated += () => EnemySideDefeated.Invoke();
         
         PlayerSideCombo = new Combo();
         EnemySideCombo = new Combo();
@@ -37,6 +43,7 @@ public class BattleController : MonoBehaviour
             return PlayerSide.CurrentBattleCharacter;
         }
 
-        throw new ArgumentException("Данный персонаж не состоит ни в одной стороне данный битвы");
+        if (character == null) throw new ArgumentException($"Данный персонаж - null: {character}");
+        throw new ArgumentException($"Данный персонаж не состоит ни в одной стороне данный битвы: {character}");
     }
 }

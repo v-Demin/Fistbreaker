@@ -1,12 +1,14 @@
 using System;
 using System.Runtime.InteropServices;
 using DG.Tweening;
+using TMPro;
 using UnityEngine;
 using Zenject;
 
 public abstract class AbstractAttributesView : MonoBehaviour
 {
     protected abstract BattleSide SideToCheck { get; }
+    [SerializeField] private TextMeshProUGUI _name;
     [SerializeField] private CharacterAttributeBar _healthBar;
     [SerializeField] private CharacterAttributeBar _manaBar;
     private Character _lastCharacter;
@@ -30,6 +32,7 @@ public abstract class AbstractAttributesView : MonoBehaviour
 
     private void UpdateBar()
     {
+        _name.text = SideToCheck.CurrentBattleCharacter.name;
         _healthBar.ShowInfo(SideToCheck.CurrentBattleCharacter.Attributes.CurrentAttributes.Health, SideToCheck.CurrentBattleCharacter.Attributes.MaxAttributes.Health);
         _manaBar.ShowInfo(SideToCheck.CurrentBattleCharacter.Attributes.CurrentAttributes.Mana, SideToCheck.CurrentBattleCharacter.Attributes.MaxAttributes.Mana);
     }

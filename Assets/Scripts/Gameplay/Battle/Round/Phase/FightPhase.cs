@@ -6,14 +6,10 @@ public class FightPhase : AbstractRoundPhase
 {
     [Inject] private readonly SPTimer _timer;
     [Inject] private readonly InputTaker _inputTaker;
-    [Inject] private readonly BattleController _battleController;
     [Inject] private readonly RhythmGameplayController _rhythmGameplay;
 
     public static Action FightPhaseStarted;
     public static Action FightPhaseEnded;
-
-    private BattleSide PlayerSide => _battleController.PlayerSide;
-    private BattleSide EnemySide => _battleController.EnemySide;
     
     
     public override void StartPhase()
@@ -24,8 +20,6 @@ public class FightPhase : AbstractRoundPhase
         _rhythmGameplay.StartGameplay();
 
         _timer.OnTimerEnded += EndPhase;
-        PlayerSide.AllCharactersDefeated += EndPhase;
-        EnemySide.AllCharactersDefeated += EndPhase;
         FightPhaseStarted?.Invoke();
     }
 
@@ -36,8 +30,6 @@ public class FightPhase : AbstractRoundPhase
         _rhythmGameplay.EndGameplay();
 
         _timer.OnTimerEnded -= EndPhase;
-        PlayerSide.AllCharactersDefeated -= EndPhase;
-        EnemySide.AllCharactersDefeated -= EndPhase;
         
         FightPhaseEnded?.Invoke();
         

@@ -1,21 +1,31 @@
 using Zenject;
 
-public class Cycle
+public class Cycle : IEnablable
 {
     [Inject] private readonly DiContainer _container;
     
     private Round _currentRound;
     
-    public void StartNewRound()
+    private void StartNewRound()
     {
         _currentRound = _container.Instantiate<Round>().Init();
-        Round.OnRoundEnd += OnRoundEnded;
-        _currentRound.StartRound();
+        _currentRound.Enable();
     }
 
-    public void OnRoundEnded()
+    public void Enable()
+    {
+        Round.OnRoundEnd += OnRoundEnded;
+        StartNewRound();
+    }
+
+    public void Disable()
     {
         Round.OnRoundEnd -= OnRoundEnded;
+        _currentRound.Disable();
+    }
+    
+    private void OnRoundEnded()
+    {
         StartNewRound();
     }
 }

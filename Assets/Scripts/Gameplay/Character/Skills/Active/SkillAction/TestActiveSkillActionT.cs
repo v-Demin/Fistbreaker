@@ -8,6 +8,6 @@ public class TestActiveSkillActionT : AbstractActiveSkillAction
 
     public override void Execute(Character owner, Character enemy)
     {
-        $"{_testMessage}".Log(_color);
+        $"{_testMessage} owner: {owner}".Log(_color);
     }
 }
