@@ -32,7 +32,7 @@ public abstract class AbstractAttributesView : MonoBehaviour
 
     private void UpdateBar()
     {
-        _name.text = SideToCheck.CurrentBattleCharacter.name;
+        _name.text = $"{SideToCheck.CurrentBattleCharacter.Bio.FirstName} {SideToCheck.CurrentBattleCharacter.Bio.LastName}";
         _healthBar.ShowInfo(SideToCheck.CurrentBattleCharacter.Attributes.CurrentAttributes.Health, SideToCheck.CurrentBattleCharacter.Attributes.MaxAttributes.Health);
         _manaBar.ShowInfo(SideToCheck.CurrentBattleCharacter.Attributes.CurrentAttributes.Mana, SideToCheck.CurrentBattleCharacter.Attributes.MaxAttributes.Mana);
     }
