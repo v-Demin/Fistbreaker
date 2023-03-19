@@ -5,7 +5,10 @@ using Zenject;
 public class Character : MonoBehaviour, IEnablable
 {
     [Inject] private readonly DiContainer _container;
+    
+    [field: SerializeField] public Animator Animator { get; private set; }
 
+    public Bio Bio;
     public AttributesContainer Attributes;
     public CharacteristicContainer Characteristics;
     
@@ -17,6 +20,8 @@ public class Character : MonoBehaviour, IEnablable
 
     public void Init()
     {
+        Bio = _container.Instantiate<Bio>();
+        
         _control = _container.Instantiate<ControlContainer>();
         
         Characteristics = new CharacteristicContainer(new List<BaseCharacteristic>()

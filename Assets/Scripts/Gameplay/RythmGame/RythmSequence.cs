@@ -9,11 +9,10 @@ using Random = Unity.Mathematics.Random;
 public class RythmSequence : ScriptableObject
 {
     [SerializeField] [Range(0f, 23f)] private List<float> _info;
-    [SerializeField] private int _BPMforSeparate = 80;
-    private float SeparateValue => 1 / (float)_BPMforSeparate;
+    [SerializeField] private float _timeToSeparate = 0.1f;
+    private float SeparateValue => _timeToSeparate;
 
     public List<float> Timings => new(_info);
-
 
     #region Tech
 
@@ -35,7 +34,7 @@ public class RythmSequence : ScriptableObject
     [Button(nameof(Randomize))]
     private void Randomize()
     {
-        for (int i = 0; i < _info.Count - 1; i++)
+        for (int i = 0; i < _info.Count; i++)
         {
             _info[i] = UnityEngine.Random.Range(0f, 23f);
         }
