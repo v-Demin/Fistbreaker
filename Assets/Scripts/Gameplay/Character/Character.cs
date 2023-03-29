@@ -23,6 +23,8 @@ public class Character : MonoBehaviour, IEnablable
         Bio = _container.Instantiate<Bio>();
         
         _control = _container.Instantiate<ControlContainer>();
+
+        _exp = new ExperienceContainer(new Level(), new Exp());
         
         Characteristics = new CharacteristicContainer(new List<BaseCharacteristic>()
         {
