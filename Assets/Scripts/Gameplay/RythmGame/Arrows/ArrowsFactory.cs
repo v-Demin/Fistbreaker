@@ -33,7 +33,8 @@ public class ArrowsFactory : MonoBehaviour
 
     public void ReturnToPool(ArrowObject arrow)
     {
-        arrow.gameObject.SetActive(false);
+        arrow.Hide();
+        arrow.HideArrows(true);
         _arrowsPool.Enqueue(arrow);
     }
 }

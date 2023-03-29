@@ -1,48 +1,29 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
-public class ArrowObject : MonoBehaviour
+public class ArrowObject : BaseRhythmMoveObject
 {
-    [SerializeField] private Ease _moveEase;
-    [SerializeField] private Ease _scaleEase;
-
-    [SerializeField] private GameObject _passiveStateRoot;
-    [SerializeField] private GameObject _activeStateRoot;
+    [SerializeField] private AbstractVisualObject _leftDirectionRoot;
+    [SerializeField] private AbstractVisualObject _upDirectionRoot;
+    [SerializeField] private AbstractVisualObject _rightDirectionRoot;
+    [SerializeField] private AbstractVisualObject _downDirectionRoot;
     
-    [SerializeField] private GameObject _leftDirectionRoot;
-    [SerializeField] private GameObject _upDirectionRoot;
-    [SerializeField] private GameObject _rightDirectionRoot;
-    [SerializeField] private GameObject _downDirectionRoot;
-
-    [SerializeField] private AnimationCurve _activeStateScaleCurve;
-    [SerializeField] private AnimationCurve _passiveStateScaleCurve;
-    
-    public void Init(bool isActiveState, InputKey direction)
+    public void ShowArrow(InputKey direction)
     {
-        _passiveStateRoot.SetActive(!isActiveState);
-        _activeStateRoot.SetActive(isActiveState);
+        HideArrows(true);
         
-        _leftDirectionRoot.SetActive(direction == InputKey.Left);
-        _upDirectionRoot.SetActive(direction == InputKey.Up);
-        _rightDirectionRoot.SetActive(direction == InputKey.Right);
-        _downDirectionRoot.SetActive(direction == InputKey.Down);
+        if (direction == InputKey.Down) _downDirectionRoot.Show();
+        if (direction == InputKey.Up) _upDirectionRoot.Show();
+        if (direction == InputKey.Right) _rightDirectionRoot.Show();
+        if (direction == InputKey.Left) _leftDirectionRoot.Show();
     }
-    
-    public void Move(float speed, RectTransform startPosition, RectTransform endPosition, bool isActiveState, Action onComplete = null)
+
+    public void HideArrows(bool fast)
     {
-        transform.position = startPosition.position;
-
-        var curve = isActiveState ? _activeStateScaleCurve : _passiveStateScaleCurve;
-
-        DOTween.To(() => 0f, value => transform.localScale = Vector3.one * curve.Evaluate(value), 1f, Vector3.Magnitude(endPosition.position - startPosition.position) / speed)
-            .SetEase(_scaleEase);
-        
-        transform.DOMove(endPosition.position, speed)
-            .SetEase(_moveEase)
-            .SetSpeedBased()
-            .OnComplete(() => onComplete?.Invoke());
+        _downDirectionRoot.Hide(fast);
+        _upDirectionRoot.Hide(fast);
+        _rightDirectionRoot.Hide(fast);
+        _leftDirectionRoot.Hide(fast);
     }
 }

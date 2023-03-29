@@ -5143,8 +5143,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _moveEase: 1
   _createdStateVisualObject: {fileID: 1162072866144297333}
-  _hitStateVisualObject: {fileID: 5941032989901489254}
-  _missedStateVisualObject: {fileID: 3083926578714129379}
+  _activeStateVisualObject: {fileID: 5941032989901489254}
+  _failedStateVisualObject: {fileID: 3083926578714129379}
 --- !u!1 &9193383135617671026
 GameObject:
   m_ObjectHideFlags: 0

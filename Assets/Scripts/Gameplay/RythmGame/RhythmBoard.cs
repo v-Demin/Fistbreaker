@@ -17,9 +17,9 @@ public class RhythmBoard : MonoBehaviour
     [SerializeField] private RectTransform _startPoint;
     [SerializeField] private RhythmFactory _factory;
 
-    private List<RhythmMoveObject> _rhythmObjects = new();
+    private List<BaseRhythmMoveObject> _rhythmObjects = new();
 
-    private RhythmMoveObject LeftRhythmObject =>
+    private BaseRhythmMoveObject LeftBaseRhythmObject =>
         _rhythmObjects.OrderBy(obj => obj.transform.position.x).Take(1).First();
 
     private bool IsObjectHitMidpoint(Component obj) =>
@@ -43,20 +43,20 @@ public class RhythmBoard : MonoBehaviour
 
     private void Update()
     {
-        if (!_rhythmObjects.IsEmpty() && IsObjectMissMidpoint(LeftRhythmObject))
+        if (!_rhythmObjects.IsEmpty() && IsObjectMissMidpoint(LeftBaseRhythmObject))
         {
-            LeftRhythmObject.ChangeActiveState(RhythmMoveObject.ActiveStateType.Missed);
-            _rhythmObjects.Remove(LeftRhythmObject);
+            LeftBaseRhythmObject.ChangeActiveState(BaseRhythmMoveObject.ActiveStateType.Failed);
+            _rhythmObjects.Remove(LeftBaseRhythmObject);
             _rhythm.OnObjectMiss();
         }
     }
 
     private void OnKeyUpdate()
     {
-        if (!_rhythmObjects.IsEmpty() && IsObjectHitMidpoint(LeftRhythmObject))
+        if (!_rhythmObjects.IsEmpty() && IsObjectHitMidpoint(LeftBaseRhythmObject))
         {
-            LeftRhythmObject.ChangeActiveState(RhythmMoveObject.ActiveStateType.Hit);
-            _rhythmObjects.Remove(LeftRhythmObject);
+            LeftBaseRhythmObject.ChangeActiveState(BaseRhythmMoveObject.ActiveStateType.Active);
+            _rhythmObjects.Remove(LeftBaseRhythmObject);
             _rhythm.OnObjectHit();
         }
         else

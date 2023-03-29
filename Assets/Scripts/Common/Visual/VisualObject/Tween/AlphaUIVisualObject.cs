@@ -8,11 +8,11 @@ using UnityEngine.UI;
 public class AlphaUIVisualObject : AbstractTweenVisualObject
 {
     [SerializeField] private float _showTime;
-    [SerializeField] private float _showAlpha;
+    [SerializeField] private float _showAlpha = 1;
     [SerializeField] private Ease _showEase;
 
     [SerializeField] private float _hideTime;
-    [SerializeField] private float _hideAlpha;
+    [SerializeField] private float _hideAlpha = 0;
     [SerializeField] private Ease _hideEase;
 
     [SerializeField] private List<Image> _images;
@@ -25,10 +25,10 @@ public class AlphaUIVisualObject : AbstractTweenVisualObject
         
         _images.ForEach(image => 
             _tweens.Add(
-                image.DOFade(_showAlpha, CheckTime(_showTime, 0f, fast))
+                image.DOFade(_showAlpha, GetTweenTime(_showTime, 0f, fast))
                     .SetEase(_showEase)));
 
-        return EmptyTween(CheckTime(_showTime, 0f, fast));
+        return EmptyTween(GetTweenTime(_showTime, 0f, fast));
     }
 
     protected override Tween HideInner(bool fast = false)
@@ -37,9 +37,9 @@ public class AlphaUIVisualObject : AbstractTweenVisualObject
         
         _images.ForEach(image => 
             _tweens.Add(
-                image.DOFade(_hideAlpha, CheckTime(_hideTime, 0f, fast))
+                image.DOFade(_hideAlpha, GetTweenTime(_hideTime, 0f, fast))
                     .SetEase(_hideEase)));
         
-        return EmptyTween(CheckTime(_hideTime, 0f, fast));
+        return EmptyTween(GetTweenTime(_hideTime, 0f, fast));
     }
 }

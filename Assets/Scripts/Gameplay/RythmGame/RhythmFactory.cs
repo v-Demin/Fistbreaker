@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class RhythmFactory : MonoBehaviour
 {
-    [SerializeField] private RhythmMoveObject _prefab;
+    [SerializeField] private BaseRhythmMoveObject _prefab;
     [SerializeField] private RectTransform _baseParent;
 
-    private Queue<RhythmMoveObject> _arrowsPool = new ();
+    private Queue<BaseRhythmMoveObject> _arrowsPool = new ();
 
     private void Start()
     {
@@ -17,22 +17,22 @@ public class RhythmFactory : MonoBehaviour
         }
     }
 
-    public RhythmMoveObject CreateNewMoveObject(RectTransform position)
+    public BaseRhythmMoveObject CreateNewMoveObject(RectTransform position)
     {
         return CreateNewMoveObjectInner(position);
     }
 
-    private RhythmMoveObject CreateNewMoveObjectInner(RectTransform position, bool takeFromPool = true)
+    private BaseRhythmMoveObject CreateNewMoveObjectInner(RectTransform position, bool takeFromPool = true)
     {
         var toReturn = _arrowsPool.IsEmpty() || !takeFromPool ? Instantiate(_prefab, position) : _arrowsPool.Dequeue();
         toReturn.gameObject.SetActive(true);
         toReturn.transform.SetParent(position);
         toReturn.transform.SetAsLastSibling();
-        toReturn.ChangeActiveState(RhythmMoveObject.ActiveStateType.Created);
+        toReturn.ChangeActiveState(BaseRhythmMoveObject.ActiveStateType.Created);
         return toReturn;
     }
 
-    public void ReturnToPool(RhythmMoveObject arrow)
+    public void ReturnToPool(BaseRhythmMoveObject arrow)
     {
         arrow.gameObject.SetActive(false);
         _arrowsPool.Enqueue(arrow);

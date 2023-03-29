@@ -4,14 +4,14 @@ using UnityEngine;
 public abstract class AbstractVisualObject : MonoBehaviour
 {
     [SerializeField] protected bool _isChangingOnStart = true;
-    [SerializeField] [ShowIf("_isChangingOnStart")] protected bool _isShowedOnStart = false;
+    [SerializeField] [ShowIf("_isChangingOnStart")] [Label("└ Is Showed On Start")] protected bool _isShowedOnStart = false;
     [SerializeField] private bool _isChangingActivityOnShowOrHide = true;
 
 
     public abstract void Show(bool fast = false);
     public abstract void Hide(bool fast = false);
     
-    protected float CheckTime(float bigTime, float fastTime, bool isFast) => isFast ? fastTime : bigTime;
+    protected float GetTweenTime(float bigTime, float fastTime, bool isFast) => isFast ? fastTime : bigTime;
 
     protected void ChangeObjectActivity(bool value)
     {

@@ -26,7 +26,8 @@ public class ArrowsView : MonoBehaviour
     private void ShowArrows(InputKey key)
     {
         var arrow = _factory.CreateNewArrow(_arrowSpawnPosition);
-        arrow.Init(false, key);
-        arrow.Move(_rhythm.Speed, _arrowSpawnPosition, _arrowDespawnPosition, false, () => _factory.ReturnToPool(arrow));
+        arrow.ShowArrow(key);
+        arrow.ChangeActiveState(BaseRhythmMoveObject.ActiveStateType.Created);
+        arrow.Move(_rhythm.Speed, _arrowSpawnPosition, _arrowDespawnPosition, () => _factory.ReturnToPool(arrow));
     }
 }
