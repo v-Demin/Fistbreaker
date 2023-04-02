@@ -1,4 +1,13 @@
 public class Level
 {
-    public int Value { get; private set; }
+    public int Value;
+
+    public Level() : this(1)
+    {
+    }
+
+    public Level(int value)
+    {
+        Value = value;
+    }
 }

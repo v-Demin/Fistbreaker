@@ -11,10 +11,10 @@ public class Character : MonoBehaviour, IEnablable
     public Bio Bio;
     public AttributesContainer Attributes;
     public CharacteristicContainer Characteristics;
+    public ExperienceContainer Exp;
     
     private ActiveSkillsContainer _activeSkills;
     private PassiveSkillContainer _passiveSkills;
-    private ExperienceContainer _exp;
     private ControlContainer _control;
     private PowerContainer _power;
 
@@ -24,7 +24,7 @@ public class Character : MonoBehaviour, IEnablable
         
         _control = _container.Instantiate<ControlContainer>();
 
-        _exp = new ExperienceContainer(new Level(), new Exp());
+        Exp = new ExperienceContainer(new Level(), new Exp(Random.Range(0, 10000)));
         
         Characteristics = new CharacteristicContainer(new List<BaseCharacteristic>()
         {
