@@ -30,7 +30,7 @@ public class Character : MonoBehaviour, IEnablable
         {
             new Strength(1),
             new Agility(2),
-            new Endurance(6),
+            new Endurance(6000),
             new Intelligence(4),
             new Willpower(5),
             new Perception(6)
@@ -47,11 +47,13 @@ public class Character : MonoBehaviour, IEnablable
 
     public void Enable()
     {
+        gameObject.SetActive(true);
         _control.Enable();
     }
 
     public void Disable()
     {
+        gameObject.SetActive(false);
         _control.Disable();
     }
     

@@ -32,6 +32,7 @@ public class DealDamageActiveSkillAction : AbstractActiveSkillAction
         $"Исходящий урон {damage}".Log(Color.green);
         
         owner.Animator.SetTrigger("Attack");
+        enemy.Animator.SetTrigger("TakeDamage");
         enemy.Attributes.CurrentAttributes.ChangeValues(damage, 0f);
     }
 }
